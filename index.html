@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Audit Agent"><meta name="theme-color" content="#ffffff">
-<title>Audit Agent · Tablet Demo</title>
+<title>Audit Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
 :root{
@@ -840,6 +841,12 @@ body.hasbar #pbar{display:flex}
 #stage.empty .clip{position:absolute;right:92px;bottom:12px;width:62px;height:62px;border-color:var(--g200);background:#fafafa}
 #stage.empty #send2{position:absolute;right:12px;bottom:12px;width:70px;height:70px}
 
+
+/* website mode: full viewport, centred chat column */
+#thread{max-width:920px;margin:0 auto}
+#pbar,.sbar{display:none!important}
+#vp{background:var(--chatbg)!important}
+#drawer:not(.on){box-shadow:none}
 </style></head><body>
 <div id="vp"><div id="stage">
   <div class="sbar"><span id="clock">06:53</span><span class="bat">100% <i></i></span></div>
@@ -1128,11 +1135,10 @@ const now=()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':
 let SC=1,SW=744,SH=1143,CW=704,CL=20,CVS=.5,FR=false;
 const LV={open:false,mode:'pop',pk:null};
 function layout(){
-  const W=innerWidth,H=innerHeight,R=744/1143;let fw=W,fh=H,ox=0,oy=0;FR=W/H>R*1.08;
-  const BH=FR?96:0;document.body.classList.toggle('hasbar',FR);if(FR){fh=H-BH-28;fw=fh*R;ox=(W-fw)/2;oy=16;}
-  SC=fw/744;SW=744;SH=fh/SC;stage.classList.toggle('framed',FR);
-  Object.assign(stage.style,{width:SW+'px',height:SH+'px',transform:`translate(${ox}px,${oy}px) scale(${SC})`});
-  CW=SW-40;CL=20;stage.style.setProperty('--cw',CW+'px');stage.style.setProperty('--cl',CL+'px');
+  const W=innerWidth,H=innerHeight;FR=false;document.body.classList.remove('hasbar');
+  SC=Math.min(1,W/744);SW=W/SC;SH=H/SC;stage.classList.remove('framed');
+  Object.assign(stage.style,{width:SW+'px',height:SH+'px',transform:`scale(${SC})`});
+  CW=Math.min(SW-40,880);CL=(SW-CW)/2;stage.style.setProperty('--cw',CW+'px');stage.style.setProperty('--cl',CL+'px');
   const rc=$('#runcard'),comp=$('#composer2');
   const pop=LV.open&&LV.mode==='pop';stage.classList.toggle('exp',LV.open&&LV.mode==='exp');stage.classList.toggle('pop',pop);
   rc.style.width=pop?(CW*.5-6)+'px':'100%';
