@@ -1372,13 +1372,10 @@ $('#composer2').addEventListener('click',e=>{if(e.target.closest('button'))retur
 $('#clip').onclick=()=>{if(PEND&&PEND.kind==='file')pickFile();else toast('Attach a policy, screenshot or link');};
 const POLICY={name:'Sales-Ops-Policy-v3.2.pdf',size:'11 KB',pages:5,rules:24,cur:null};
 const fmtSize=b=>b<1024*1024?Math.max(1,Math.round(b/1024))+' KB':(b/1048576).toFixed(1)+' MB';
-const fpk=document.createElement('input');fpk.type='file';fpk.accept='.pdf,.doc,.docx,application/pdf';fpk.style.display='none';document.body.appendChild(fpk);
+const fpk=document.createElement('input');fpk.type='file';fpk.style.display='none';document.body.appendChild(fpk);
 function pickFile(){fpk.value='';fpk.click();}
 fpk.addEventListener('change',async()=>{const f=fpk.files&&fpk.files[0];if(!f||!PEND||PEND.kind!=='file')return;
-  let ok=false;try{const head=new TextDecoder('latin1').decode(await f.arrayBuffer());ok=/%PDF-/.test(head.slice(0,1024))&&/Ether Sales Operations Policy/.test(head);}catch(e){}
-  if(!ok){rejectFile(f.name);return;}attachFile(f.name,fmtSize(f.size));});
-function rejectFile(name){$('#attach').classList.remove('on');filled=false;layout();
-  ai(`<p><b>That file doesn’t look like a policy.</b> “${esc(name)}” isn’t the sales ops policy I can audit against.</p><p style="color:#6b7280">Please upload your policy document (PDF).</p>`,{ms:500});}
+  attachFile(f.name,fmtSize(f.size));});
 function fileMeta(){const c=POLICY.cur;return c.name===POLICY.name?`${POLICY.pages} pages · ${c.size}`:c.size;}
 function attachFile(name,size){POLICY.cur={name,size};$('#attach b').textContent=name;$('#attach span').textContent=fileMeta();$('#attach .ico').textContent=(name.split('.').pop()||'PDF').toUpperCase().slice(0,4);
   $('#attach').classList.add('on');filled=true;layout();setTimeout(()=>{layout();toBottom();},60);suggest($('#send2'));if(AUTO)setTimeout(()=>{if(PEND&&PEND.kind==='file'&&filled)send();},300);}
@@ -1619,7 +1616,7 @@ async function flow(){
     setTl(rows[2],'run','Checking the code','');await sleep(900);setTl(rows[2],'ok','2-step code accepted','');}
   else setTl(rows[2],'ok','No 2-step verification needed','');
   setTl(rows[3],'run','Opening the portal');await sleep(1000);setTl(rows[3],'ok','Signed in · portal 247617210');$('.tst',tl).textContent='Signed in';
-  setStage('policy');await ai(`Now <b>upload the policy</b> you want me to audit against, as a PDF.`);
+  setStage('policy');await ai(`Now <b>upload the policy</b> you want me to audit against.`);
   await expect({kind:'file'});DS.policy=true;
   const rd=await aiCard(`<div class="card2"><div class="ch2"><b>Reading · ${esc(POLICY.cur.name.replace(/\.[^.]+$/,''))}</b><span class="rs">${POLICY.cur.name===POLICY.name?POLICY.pages+' pages':POLICY.cur.size}</span></div><div class="readbar"><div class="t"><span>Finding the rules in your policy…</span><span class="pc">0%</span></div><div class="b"><i></i></div></div></div>`,600);
   await sleep(50);$('.readbar .b i',rd).style.width='100%';for(let p=0;p<=100;p+=10){$('.readbar .pc',rd).textContent=p+'%';await sleep(150);}
