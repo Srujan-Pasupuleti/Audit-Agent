@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
@@ -849,6 +850,146 @@ body.hasbar #pbar{display:flex}
 #pcards{grid-template-columns:repeat(var(--n,3),minmax(0,1fr))!important}
 #stage.pop #pcards{grid-template-columns:minmax(0,1fr)!important}
 #pcards .pc .pt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* single-site chat */
+#lvTabs{display:none}
+#pcards{grid-template-columns:minmax(0,1fr)!important}
+
+/* compact single-site run card */
+#pcards{display:none!important}
+#runcard{padding:14px 16px}
+#runcard .rch{gap:14px}
+#runcard.done #ringC{stroke:#16a34a}
+
+/* ===== connectors ===== */
+.dgx{display:flex;align-items:center;justify-content:space-between;padding-right:4px}
+.dadd{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--g200);background:#fff;font-size:12.5px;font-weight:700;color:var(--g900);letter-spacing:0;text-transform:none}
+.dadd svg{width:14px;height:14px}
+.di .mfa{color:#16a34a;display:flex}.di .mfa svg{width:15px;height:15px}
+.di .pl{font-size:10px}
+/* chips */
+.cchip{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:7px 16px 7px 8px;border-radius:16px;border:1px solid var(--g200);background:#fff;text-align:left;box-shadow:0 1px 2px rgba(16,24,40,.04);transition:transform .12s,border-color .2s,background .2s}
+.cchip:active{transform:scale(.96)}
+.cchip .pl{width:34px;height:34px;border-radius:10px;color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 34px}
+.cchip .cx{display:flex;flex-direction:column;line-height:1.25}
+.cchip .cx b{font-size:14.5px;font-weight:650;color:var(--g900)}
+.cchip .cx span{font-size:12.5px;color:var(--g500)}
+.cchip.add{border-style:dashed;color:var(--g600);padding-left:14px}
+.cchip.add svg{width:18px;height:18px}
+.cchip.picked{border-color:var(--g900);background:var(--g900)}.cchip.picked .cx b,.cchip.picked .cx span{color:#fff}
+.qr.used .cchip:not(.picked){opacity:.45}
+.cpick{display:flex;flex-wrap:wrap;gap:10px}
+#hchips{display:none;margin-top:16px}
+#stage.empty #hchips{display:block;animation:mIn .5s}
+.hcl{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-align:center;margin-bottom:10px}
+.hcc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+/* modals */
+.modal{position:absolute;inset:0;z-index:95;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.modal.on{display:flex;animation:fi .2s}
+.cm{width:min(600px,100%);background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.35);display:flex;flex-direction:column;max-height:94%;animation:shIn .35s cubic-bezier(.2,.8,.2,1)}
+.cmh{display:flex;gap:14px;align-items:flex-start;padding:20px 20px 14px;border-bottom:1px solid var(--g200)}
+.cmi{width:42px;height:42px;border-radius:12px;background:#fff1ec;color:#ff6a3d;display:flex;align-items:center;justify-content:center;flex:0 0 42px}.cmi svg{width:21px;height:21px}
+.cmh h3{font-size:19px;font-weight:800}.cmh p{font-size:13.5px;color:var(--g500);margin-top:3px;line-height:1.4}
+.cmh .x{margin-left:auto;width:40px;height:40px;border-radius:11px;background:var(--g100);display:flex;align-items:center;justify-content:center;flex:0 0 40px}.cmh .x svg{width:18px;height:18px}
+.cmb{padding:8px 20px 18px;overflow-y:auto}
+.fl{display:block;font-size:13px;font-weight:700;color:var(--g700);margin:14px 0 6px}
+.fi{width:100%;height:50px;border-radius:12px;border:1.5px solid var(--g200);padding:0 14px;font-size:16px;outline:0;background:#fff;transition:border-color .2s,box-shadow .2s}
+.fi:focus,.fi.sg{border-color:#ff6a3d;box-shadow:0 0 0 4px rgba(255,106,61,.12)}
+.fi.sg{animation:none}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sel{position:relative}
+.selb{width:100%;height:52px;border-radius:12px;border:1.5px solid var(--g200);padding:0 14px 0 10px;display:flex;align-items:center;gap:10px;font-size:16px;background:#fff;text-align:left}
+.selb .ph{color:var(--g400);padding-left:4px;flex:1}.selb b{flex:1;font-weight:600}
+.selb .pl{width:32px;height:32px;border-radius:9px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.selb .chev{color:var(--g400);transform:rotate(90deg);display:flex}.selb .chev svg{width:18px;height:18px}
+.selb.sg{border-color:#ff6a3d;box-shadow:0 0 0 4px rgba(255,106,61,.12);animation:none}
+.dd2{display:none;position:absolute;left:0;right:0;top:58px;max-height:340px;overflow-y:auto;background:#fff;border:1px solid var(--g200);border-radius:14px;box-shadow:0 18px 40px rgba(16,24,40,.18);z-index:5;padding:6px}
+.sel.open .dd2{display:block;animation:mIn .2s}
+.ddg{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);padding:10px 10px 4px}
+.ddo{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:10px;font-size:15px;text-align:left}
+.ddo:hover,.ddo:active{background:var(--g100)}
+.ddo .pl{width:28px;height:28px;border-radius:8px;color:#fff;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ddo b{font-weight:600;flex:1}.ddc{font-size:11.5px;font-weight:700;color:#15803d;background:#f0fdf4;border-radius:999px;padding:2px 8px}
+.sel.open .ddo[data-k="hs"]{box-shadow:inset 0 0 0 2px #fdba9e}
+.fck{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:14px;border-radius:14px;border:1.5px solid var(--g200);cursor:pointer;transition:all .2s}
+.fck input{display:none}
+.fck .bx{width:24px;height:24px;border-radius:7px;border:2px solid var(--g300);display:flex;align-items:center;justify-content:center;flex:0 0 24px;margin-top:1px}
+.fck .bx svg{width:14px;height:14px;color:#fff;opacity:0}
+.fck.on{border-color:#86efac;background:#f0fdf4}.fck.on .bx{background:#16a34a;border-color:#16a34a}.fck.on .bx svg{opacity:1}
+.fck b{display:block;font-size:15px}.fck em{display:block;font-style:normal;font-size:13px;color:var(--g500);margin-top:3px;line-height:1.4}
+.fck.sg{border-color:#ff6a3d;animation:sg 1.6s infinite}
+.cmf{display:flex;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid var(--g200);background:var(--g50);border-radius:0 0 22px 22px}
+.cmf .sec{flex:1;display:flex;align-items:center;gap:7px;font-size:13px;color:var(--g500)}.cmf .sec svg{width:14px;height:14px}
+.qb[disabled]{opacity:.4;pointer-events:none}
+.mm{width:min(420px,100%);background:#fff;border-radius:24px;padding:28px 26px 20px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:shIn .35s cubic-bezier(.2,.8,.2,1)}
+.mmi{width:56px;height:56px;border-radius:16px;background:#f0fdf4;color:#16a34a;display:flex;align-items:center;justify-content:center;margin:0 auto}.mmi svg{width:28px;height:28px}
+.mm h3{font-size:21px;font-weight:800;margin-top:14px}
+.mm p{font-size:14.5px;color:var(--g600);margin-top:6px;line-height:1.45}
+.mcodes{margin:20px 0 4px;cursor:text;border-radius:14px;padding:6px}
+.mcodes.sg{animation:sg 1.6s infinite}
+.mhid{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.mver{width:100%;height:50px;margin-top:16px;border-radius:14px!important}
+.mnote{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;color:var(--g500);margin-top:14px}.mnote svg{width:14px;height:14px}
+.mcan{margin-top:10px;font-size:13.5px;color:var(--g500);font-weight:600}
+
+.hva{display:flex;align-items:center;gap:4px;margin:12px auto 0;background:none;border:0;padding:6px 10px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;line-height:1;color:var(--g500,#6b7280);cursor:pointer}.hva:hover{color:var(--g900,#111827);background:rgba(0,0,0,.04)}.hva svg{width:14px;height:14px}
+
+.rsum{padding:14px 20px 4px;font-size:15px;line-height:1.55;color:#111827}.rsum p{margin:0}
+.rlegend{padding:12px 20px;font-size:13px;line-height:1.5;color:#6b7280;border-top:1px solid #f0f1f4}
+
+.dgb{display:flex;align-items:center;gap:6px}
+.dva{background:none;border:0;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--g500);letter-spacing:0;text-transform:none;padding:6px 8px;border-radius:8px;cursor:pointer}.dva:hover{color:var(--g900);background:var(--g100)}
+.dspin{width:18px;height:18px;border-radius:50%;border:2.5px solid #ffe1d6;border-top-color:#ff6a3d;animation:sp .8s linear infinite;flex:0 0 18px;margin-right:6px}
+.st2 .dspin{width:10px;height:10px;border-width:2px;margin:0 5px -1px 0;display:inline-block;vertical-align:-1px;flex:none}
+#cpage{position:absolute;inset:0;z-index:55;background:var(--g50,#f4f5f8);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .28s,transform .28s}
+#cpage.on{opacity:1;pointer-events:auto;transform:none}
+.cph{display:flex;align-items:center;gap:14px;padding:18px 24px;background:#fff;border-bottom:1px solid var(--g200);flex:0 0 auto}
+.cpb{width:42px;height:42px;border-radius:12px;border:1px solid var(--g200);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--g900);cursor:pointer}.cpb svg{width:20px;height:20px}
+.cpt{flex:1;min-width:0}.cpt b{display:block;font-size:20px;font-weight:800;color:var(--g900)}.cpt span{display:block;font-size:13px;color:var(--g500);margin-top:2px}
+.cpadd{display:inline-flex;align-items:center;gap:6px}.cpadd svg{width:16px;height:16px}
+.cpbody{flex:1;overflow:auto;padding:22px 24px 40px;max-width:960px;width:100%;margin:0 auto;box-sizing:border-box}
+.cpg{margin-bottom:26px}
+.cpgh{display:flex;align-items:center;gap:10px;margin-bottom:12px}.cpgh .pl{width:30px;height:30px;border-radius:9px;color:#fff;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+.cpgh b{font-size:16px;font-weight:750;color:var(--g900)}.cpgh span{font-size:13px;color:var(--g500)}
+.cpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.cpc{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.cpc1{display:flex;align-items:center;justify-content:space-between;gap:10px}.cpc1 b{font-size:15.5px;font-weight:750;color:var(--g900);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cpc .st2{font-size:11.5px;font-weight:750;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.cpr{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--g600,#4b5563);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.cpr span{display:flex;color:var(--g400)}.cpr svg{width:14px;height:14px}
+.cpf{display:flex;align-items:center;justify-content:space-between;margin-top:4px;padding-top:10px;border-top:1px solid var(--g100)}
+.cpm{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--g500)}.cpm.on{color:#15803d}.cpm svg{width:14px;height:14px}
+.cpf em{font-style:normal;font-size:12px;color:var(--g400)}
+
+.dadd2{display:flex;align-items:center;gap:8px;width:100%;padding:10px;margin-top:2px;border:1px dashed var(--g200);border-radius:12px;background:#fff;font-family:inherit;font-size:14px;font-weight:650;color:var(--g700,#374151);cursor:pointer}.dadd2 svg{width:16px;height:16px}.dadd2:hover{background:var(--g50,#f9fafb)}
+.cmore{align-self:center;background:none;border:0;font-family:inherit;font-size:14px;font-weight:650;color:var(--g500);padding:10px 12px;border-radius:10px;cursor:pointer}.cmore:hover{color:var(--g900);background:rgba(0,0,0,.04)}
+.used .cmore{display:none}
+
+.cpact{flex-basis:100%;display:flex;align-items:center;gap:22px;margin-top:2px}
+.cpact .cmore{display:inline-flex;align-items:center;gap:6px;padding:8px 4px;align-self:auto}.cpact .cmore svg{width:16px;height:16px}
+.cchip.add.lnk{border:0;background:none;box-shadow:none;padding:8px 4px;min-height:0;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--g900)}
+.cchip.add.lnk svg{width:16px;height:16px}.cchip.add.lnk:hover{background:none;text-decoration:underline}
+
+.fi:disabled{background:var(--g50,#f6f7f9);color:var(--g500);cursor:not-allowed;-webkit-text-fill-color:var(--g500);opacity:1}
+.fnote{display:flex;gap:8px;align-items:flex-start;margin:16px 0 0;padding:12px 14px;border-radius:12px;background:#f0fdf4;color:#166534;font-size:13px;line-height:1.45}.fnote svg{width:16px;height:16px;flex:0 0 16px;margin-top:1px}
+.ddc2{margin-left:auto;font-size:12px;color:var(--g400);font-weight:500}
+
+.band.d .bl{background:#e7f8ee;color:#15803d}.cyc.d{background:#e7f8ee;color:#15803d}
+.srow .cyc{border:0;cursor:pointer;font-family:inherit;align-items:center;gap:4px}.editing .srow .cyc{display:inline-flex}
+.srow .cyc svg{width:13px;height:13px}
+.cadm{position:absolute;z-index:58;width:240px;background:#fff;border:1px solid var(--g200);border-radius:14px;box-shadow:0 18px 40px rgba(17,24,39,.18);padding:6px;animation:mIn .18s}
+.cadh{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);padding:8px 10px 6px}
+.cadm button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:9px 10px;border-radius:10px;font-family:inherit;text-align:left;cursor:pointer;color:var(--g900)}
+.cadm button:hover,.cadm button.on{background:var(--g100)}
+.cadm button span{flex:1}.cadm b{display:block;font-size:14px;font-weight:650}.cadm em{display:block;font-style:normal;font-size:12px;color:var(--g500)}
+.cadm button svg{width:16px;height:16px;color:#16a34a}
+.cdot{width:10px;height:10px;border-radius:50%;flex:0 0 10px}.cdot.d{background:#22c55e}.cdot.w{background:#2f54eb}.cdot.b{background:#6941c6}.cdot.m{background:#c4320a}
+
+.scan::after{display:none!important;animation:none!important}
+.dpct{font-size:12.5px;font-weight:750;color:#c2410c;font-variant-numeric:tabular-nums;margin-right:2px}
+
+.scan{display:none!important}
+.shot{border:0!important;box-shadow:none!important}
+.shot::before{display:none}
 </style></head><body>
 <div id="vp"><div id="stage">
   <div class="sbar"><span id="clock">06:53</span><span class="bat">100% <i></i></span></div>
@@ -874,12 +1015,13 @@ body.hasbar #pbar{display:flex}
       </div>
       <div id="pcards"></div>
     </div>
-    <div id="attach"><div class="ico">PDF</div><div><b>Sales-Ops-Policy-v3.2.pdf</b><span>14 pages · 412 KB</span></div><button class="x" id="attX" data-ic="x"></button></div>
+    <div id="attach"><div class="ico">PDF</div><div><b>Sales-Ops-Policy-v3.2.pdf</b><span>5 pages · 11 KB</span></div><button class="x" id="attX" data-ic="x"></button></div>
     <div id="composer2">
       <button class="clip" id="clip" aria-label="Attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l8-8"/></svg></button>
       <div class="inpw" id="inpw"><input id="inp" type="text" autocomplete="off" placeholder="Message Audit Agent..."><div class="credsv"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><b id="credU" style="font-weight:500"></b></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/></svg><b id="credP" style="font-weight:500;letter-spacing:2px"></b></span></div></div>
       <button id="send2" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
+    <div id="hchips"></div>
   </div>
 
   <div id="live">
@@ -909,6 +1051,9 @@ body.hasbar #pbar{display:flex}
     </div>
   </div>
 
+  <div id="cpage"></div>
+  <div id="cmodal" class="modal"></div>
+  <div id="mmodal" class="modal"></div>
   <div id="scrim"></div>
   <aside id="drawer"></aside>
   <div id="sheet"><div class="sh" id="sh"></div></div>
@@ -938,14 +1083,14 @@ icons();
 
 /* ---------- platforms & questions ---------- */
 const PL={
- hs:{n:'HubSpot',a:'H',c:'#ff5c35',dom:'app.hubspot.com',site:'Ether trial – Pipeline Health'},
- ga:{n:'Google Ads',a:'G',c:'#1a73e8',dom:'ads.google.com',site:'Northwind · 482-113-0921'},
- sf:{n:'Salesforce',a:'SF',c:'#0176d3',dom:'northwind.lightning.force.com',site:'Northwind Sales'},
+ hs:{n:'HubSpot',a:'H',c:'#ff5c35',dom:'app.hubspot.com',site:'Ether Trial'},
+ ga:{n:'Google Ads',a:'G',c:'#1a73e8',dom:'ads.google.com',site:'Performance Ads'},
+ sf:{n:'Salesforce',a:'SF',c:'#0176d3',dom:'ether.lightning.force.com',site:'Ether Sales Cloud'},
  meta:{n:'Meta Ads',a:'M',c:'#0866ff',na:1},shop:{n:'Shopify',a:'S',c:'#5e8e3e',na:1}};
 const QS=[
  {id:'H1',p:'hs',cl:'§3.1',t:'Is the sales pipeline set up with clear stages and rules?',d:'Pipeline stages, required properties, pipeline rules',sev:'G',cad:'m'},
  {id:'H2',p:'hs',cl:'§3.2',t:'Do open deals have an owner, amount and future close date?',d:'Open deals with no owner, no amount, or a close date in the past',sev:'C',cad:'w'},
- {id:'H3',p:'hs',cl:'§4.1',t:'Is every contact assigned to an owner?',d:'Contacts in the “Unassigned contacts” view',sev:'C',cad:'w'},
+ {id:'H3',p:'hs',cl:'§4.1',t:'Is every contact assigned to an owner?',d:'Contacts in the “Unassigned contacts” view',sev:'C',cad:'d'},
  {id:'H4',p:'hs',cl:'§4.2',t:'Is there a follow-up sequence for new leads?',d:'Active sequences, and whether new leads are enrolled',sev:'G',cad:'b'},
  {id:'H5',p:'hs',cl:'§6.1',t:'Are calls and meetings being logged?',d:'Calls and meetings with no outcome, last 30 days',sev:'G',cad:'w'},
  {id:'H6',p:'hs',cl:'§6.3',t:'Are overdue tasks cleared every week?',d:'Tasks more than 7 days overdue',sev:'C',cad:'w'},
@@ -960,7 +1105,7 @@ const QS=[
  {id:'S1',p:'sf',cl:'',t:'Who can see or export all our data?',d:'',sev:'C',cad:'m'},
  {id:'S2',p:'sf',cl:'',t:'Can we trust the forecast?',d:'',sev:'G',cad:'m'},
 ];
-const CADN={w:'Weekly',b:'Every 2 weeks',m:'Monthly'},CADW={w:'Mon 09:00',b:'Thu 10:00',m:'1st, 08:00'};
+const CADN={d:'Daily',w:'Weekly',b:'Every 2 weeks',m:'Monthly'},CADW={d:'Every day, 07:00',w:'Mon 09:00',b:'Thu 10:00',m:'1st, 08:00'};
 const pz=(n,w)=>`${n} ${w}${n===1?'':'s'}`;
 const pl=(k,cls='pl')=>`<span class="${cls}" style="background:${PL[k].c}">${PL[k].a}</span>`;
 
@@ -973,7 +1118,7 @@ const DEALS=[['Rotterdam Port Logistics','Contract sent','€48,000','30 Jun 202
 const dealHead='<thead><tr><th>Deal name</th><th>Stage</th><th>Amount</th><th>Close date</th><th>Owner</th></tr></thead>';
 const dealRows=(flag)=>DEALS.map(d=>`<tr class="${flag&&d[5]?'x':''}"><td class="l">${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${flag&&d[5]?`<span class="pill r xp" style="opacity:1">${d[3]}</span>`:d[3]}</td><td>${d[4]}</td></tr>`).join('');
 
-const gaShell=(on,body)=>`<div class="ga"><div class="gan"><div class="gl2">A</div><div class="nm">Ads</div><div class="acc"><b>Northwind Labs</b>482-113-0921</div><div class="srch">Search for a page or campaign</div><div class="av" style="background:#5f6368">AB</div></div><div class="gab"><aside class="gas"><a>Overview</a><a>Recommendations</a><a id="g-camp" class="${on==='camp'?'on':''}">Campaigns</a><div class="g">Insights &amp; reports</div><a class="${on==='st'?'on':''}">Search terms</a><div class="g">Keywords</div><a id="g-neg" class="${on==='neg'?'on':''}">Negative keywords</a><div class="g">Goals</div><a id="g-conv" class="${on==='conv'?'on':''}">Conversions</a><a>Billing</a></aside><div class="gac">${body}</div></div></div>`;
+const gaShell=(on,body)=>`<div class="ga"><div class="gan"><div class="gl2">A</div><div class="nm">Ads</div><div class="acc"><b>Ether</b>482-113-0921</div><div class="srch">Search for a page or campaign</div><div class="av" style="background:#5f6368">AB</div></div><div class="gab"><aside class="gas"><a>Overview</a><a>Recommendations</a><a id="g-camp" class="${on==='camp'?'on':''}">Campaigns</a><div class="g">Insights &amp; reports</div><a class="${on==='st'?'on':''}">Search terms</a><div class="g">Keywords</div><a id="g-neg" class="${on==='neg'?'on':''}">Negative keywords</a><div class="g">Goals</div><a id="g-conv" class="${on==='conv'?'on':''}">Conversions</a><a>Billing</a></aside><div class="gac">${body}</div></div></div>`;
 const sfShell=(tab,side,body)=>`<div class="sf"><div class="sfh"><div class="cl"></div><div class="srch">Search…</div><div class="av" style="background:#0176d3">AB</div></div><div class="sfn"><div class="ap"><i>${'<b></b>'.repeat(9)}</i>${side?'Setup':'Sales'}</div>${side?['Home','Object Manager'].map(x=>`<span class="${x==='Home'?'on':''}">${x}</span>`).join(''):['Home','Opportunities','Accounts','Forecasts','Reports'].map(x=>`<span ${x==='Forecasts'?'id="s-fc"':''} class="${x===tab?'on':''}">${x}</span>`).join('')}</div><div class="sfb">${side?`<aside class="sfs"><div class="g">Users</div><a id="s-prof" class="${side==='prof'?'on':''}">Profiles</a><a>Permission Sets</a><a id="s-usr" class="${side==='usr'?'on':''}">Users</a><div class="g">Security</div><a>Sharing Settings</a><a>Login History</a></aside>`:''}<div class="sfc">${body}</div></div></div>`;
 const sfHead=(small,title,extra='')=>`<div class="hd"><div class="ic">${IC.users}</div><div><small>${small}</small><h1>${title}</h1></div><div style="margin-left:auto;display:flex;gap:8px">${extra}</div></div>`;
 
@@ -987,19 +1132,19 @@ hsOld:[
   <table class="ht xs" id="tblD"><thead><tr><th>Name</th><th>Removed</th><th>Role</th><th>Still owns</th></tr></thead><tbody><tr class="x"><td class="l">Bram Vos</td><td>12 Aug 2026</td><td>Account Executive</td><td><span class="pill r">6 open deals · €121,000</span></td></tr><tr class="x"><td class="l">Iris Dekker</td><td>2 Sep 2026</td><td>Account Manager</td><td><span class="pill r">3 open deals · €63,500</span></td></tr></tbody></table></div></div></div>`},
  {q:'H1',url:'/contacts/4471/objects/0-1/views/all/list',title:'Contacts',label:'Looking for leads with no owner',click:'#c-add',scan:'#cT',proof:'Leads with no owner',
   notes:[['bad','14 sales-ready leads have no owner']],
-  html:()=>`<div class="hs">${hsNav('Contacts')}<div class="hsc"><h1>Contacts <small>Northwind Labs</small></h1><div class="htabs"><span class="on">All contacts (8,412)</span><span>My contacts</span><span>Unassigned</span></div>
+  html:()=>`<div class="hs">${hsNav('Contacts')}<div class="hsc"><h1>Contacts <small>Ether</small></h1><div class="htabs"><span class="on">All contacts (8,412)</span><span>My contacts</span><span>Unassigned</span></div>
   <div class="fbar"><span class="fbtn" id="c-add">+ Add filter</span><span class="fchip xs">Lifecycle stage is Sales qualified lead</span><span class="fchip xs">Contact owner is unknown</span><span class="rc"><span class="b4"><b>8,412</b> contacts</span><span class="xs"><b class="r">14</b> contacts</span></span></div>
   <table class="ht" id="cT"><thead><tr><th>Name</th><th>Company</th><th>Lifecycle stage</th><th>Owner</th><th>Became SQL</th></tr></thead>
   <tbody class="b4">${[['Lotte van Dam','Zwolle Freight','Customer','Anna de Vries','—'],['Joris Meijer','Breda Tools','Lead','Tom Bakker','—'],['Sophie Kuipers','Delft Analytics','Sales qualified lead','Priya Shah','2 Oct'],['Milan de Graaf','Arnhem Cloud','Opportunity','Mark Jansen','—'],['Eva Brouwer','Tilburg Print','Marketing qualified lead','—','—'],['Thijs Hendriks','Nijmegen Med','Customer','Sara Lopez','—'],['Anouk Smits','Almere Homes','Lead','Emma Visser','—']].map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')}</tbody>
   <tbody class="xs">${[['Eline Boer','Zwolle Freight','2 Oct'],['Stijn Jacobs','Breda Tools','1 Oct'],['Fleur Mertens','Delft Analytics','30 Sep'],['Noah Dekker','Arnhem Cloud','29 Sep'],['Julia Vermeer','Tilburg Print','27 Sep'],['Sem Verhoeven','Nijmegen Med','25 Sep'],['Tess Kramer','Almere Homes','24 Sep']].map(r=>`<tr class="x"><td class="l">${r[0]}</td><td>${r[1]}</td><td>Sales qualified lead</td><td><span class="pill r">No owner</span></td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div></div>`},
  {q:'H2',url:'/contacts/4471/objects/0-3/views/open',title:'Deals',label:'Filtering open deals by close date',click:'#d-add',scan:'#dT',proof:'Deals past close date',
   notes:[['bad','118 of 381 open deals (31%) are past their close date']],
-  html:()=>`<div class="hs">${hsNav('Deals')}<div class="hsc"><h1>Deals <small>Northwind Labs</small></h1><div class="htabs"><span>All deals</span><span class="on">Open deals (381)</span><span>Closed lost</span></div>
+  html:()=>`<div class="hs">${hsNav('Deals')}<div class="hsc"><h1>Deals <small>Ether</small></h1><div class="htabs"><span>All deals</span><span class="on">Open deals (381)</span><span>Closed lost</span></div>
   <div class="fbar"><span class="fbtn" id="d-add">+ Add filter</span><span class="fchip xs">Close date is before today</span><span class="rc"><span class="b4"><b>381</b> open deals</span><span class="xs"><b class="r">118</b> of 381 · <b class="r">31%</b></span></span></div>
   <table class="ht" id="dT">${dealHead}<tbody class="b4">${dealRows(false)}</tbody><tbody class="xs">${dealRows(true)}</tbody></table></div></div>`},
  {q:'H2',url:'/contacts/4471/objects/0-3/views/closed-lost',title:'Deals',label:'Reading lost deals for missing reasons',click:'#d-lost',scan:'#dL',proof:'Lost deals with no reason',
   notes:[['bad','44% of lost deals have no reason, so we can\'t learn from them'],['ok','Missing amount or owner: 7%, under the 10% limit']],
-  html:()=>`<div class="hs">${hsNav('Deals')}<div class="hsc"><h1>Deals <small>Northwind Labs</small></h1><div class="htabs"><span>All deals</span><span class="tA">Open deals (381)</span><span class="tB" id="d-lost">Closed lost (118)</span></div>
+  html:()=>`<div class="hs">${hsNav('Deals')}<div class="hsc"><h1>Deals <small>Ether</small></h1><div class="htabs"><span>All deals</span><span class="tA">Open deals (381)</span><span class="tB" id="d-lost">Closed lost (118)</span></div>
   <div class="fbar"><span class="fchip xs">Closed in last 90 days</span><span class="rc xs"><b class="r">52</b> of 118 have no reason · <b class="r">44%</b></span></div>
   <table class="ht b4">${dealHead}<tbody>${dealRows(false)}</tbody></table>
   <table class="ht xs" id="dL"><thead><tr><th>Deal name</th><th>Amount</th><th>Closed</th><th>Owner</th><th>Lost reason</th></tr></thead><tbody>${[['Zaandam Paper','€14,000','18 Sep','Tom Bakker',''],['Hilversum TV – Ads','€32,000','2 Sep','Mark Jansen','Price'],['Apeldoorn Care','€11,500','27 Aug','Emma Visser',''],['Maastricht Wines','€8,000','14 Aug','Daan Smit',''],['Dordrecht Marine','€26,000','30 Jul','Sara Lopez','Chose competitor'],['Venlo Agro','€19,000','22 Jul','Tom Bakker','']].map(l=>`<tr class="${l[4]?'':'x'}"><td class="l">${l[0]}</td><td>${l[1]}</td><td>${l[2]} 2026</td><td>${l[3]}</td><td>${l[4]||'<span class="pill r">Empty</span>'}</td></tr>`).join('')}</tbody></table></div></div>`},
@@ -1065,7 +1210,7 @@ STEPS.hs=[
   notes:[['ok','Every open deal has an owner'],['bad','27 open deals have no amount'],['bad','118 of 381 open deals (31%) are past their close date']],html:OH[2].html},
  {q:'H3',sec:'Contacts',url:'/contacts/4471/objects/0-1/views/unassigned',title:'Contacts',label:'Opening "Unassigned contacts"',click:'#c-un',scan:'#cU',proof:'Unassigned contacts',
   notes:[['bad','312 contacts have no owner, 14 of them are sales-ready leads']],
-  html:()=>hsPage('Contacts','',`<h1>Contacts <small>Ether trial – Pipeline Health</small></h1><div class="htabs"><span class="tA">All contacts (8,412)</span><span>My contacts</span><span class="tB" id="c-un">Unassigned contacts</span></div>
+  html:()=>hsPage('Contacts','',`<h1>Contacts <small>Ether Trial</small></h1><div class="htabs"><span class="tA">All contacts (8,412)</span><span>My contacts</span><span class="tB" id="c-un">Unassigned contacts</span></div>
    <div class="fbar"><span class="rc"><span class="b4"><b>8,412</b> contacts</span><span class="xs"><b class="r">312</b> contacts · <b class="r">14</b> sales-ready</span></span></div>
    <table class="ht" id="cU"><thead><tr><th>Name</th><th>Company</th><th>Lifecycle stage</th><th>Owner</th></tr></thead>
    <tbody class="b4">${[['Lotte van Dam','Zwolle Freight','Customer','Anna de Vries'],['Joris Meijer','Breda Tools','Lead','Tom Bakker'],['Sophie Kuipers','Delft Analytics','Opportunity','Priya Shah'],['Milan de Graaf','Arnhem Cloud','Customer','Mark Jansen'],['Thijs Hendriks','Nijmegen Med','Lead','Sara Lopez'],['Anouk Smits','Almere Homes','Lead','Emma Visser']].map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
@@ -1114,6 +1259,7 @@ const stepOf=id=>STEPS.hs.find(s=>s.q===id);
 })();
 /* ---------- extra icons & timings ---------- */
 Object.assign(IC,{
+ user:P('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>'),
  sliders:P('<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>'),
  db:P('<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>'),
  shield:P('<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>'),
@@ -1151,7 +1297,7 @@ function layout(){
     if(pop){const w=CW*.5-6,h=Math.max(rcH,SH*.42);g={left:CL+CW-w,top:compTop-12-h,width:w,height:h};}
     else{const rcTop=compTop-12-rcH;g={left:CL,top:top0,width:CW,height:rcTop-12-top0};}
     Object.assign(live.style,{left:g.left+'px',top:g.top+'px',width:g.width+'px',height:g.height+'px'});
-    const bw=g.width-20,bh=g.height-54-42-10,VW=pop?960:1120;let cH=Math.max(pop?560:380,Math.min(1500,VW*bh/bw)),s=bw/VW;if(cH*s>bh)s=bh/cH;
+    const bw=g.width-20,bh=g.height-54-$('#lvTabs').offsetHeight-10,VW=pop?960:1120;let cH=Math.max(pop?560:380,Math.min(1500,VW*bh/bw)),s=bw/VW;if(cH*s>bh)s=bh/cH;
     Object.assign(cv.style,{width:VW+'px',height:cH+'px',transform:`scale(${s})`,left:((bw-VW*s)/2)+'px'});CVS=s;
   }
 }
@@ -1181,18 +1327,29 @@ function setStat(t){$('#hstat').textContent=t;}
 
 /* ---------- composer & scripted replies ---------- */
 const inpw=$('#inpw');let PEND=null,typing=false,filled=false;
-function expect(spec){return new Promise(res=>{PEND={...spec,res};filled=false;suggest(spec.kind==='file'?$('#clip'):inpw);});}
+function expect(spec){return new Promise(res=>{PEND={...spec,res};filled=false;inp.readOnly=spec.kind==='file';inp.placeholder=spec.kind==='file'?'Tap to attach your policy file':(stage.classList.contains('empty')?inp.placeholder:'Message Audit Agent...');suggest(spec.kind==='file'?$('#clip'):inpw);});}
 async function typeIn(text,set,speed=26){typing=true;for(let i=1;i<=text.length;i++){set(text.slice(0,i));await sleep(text[i-1]===' '?speed*1.5:speed);}typing=false;}
 async function autoFill(){
   if(!PEND||typing||filled)return;const k=PEND.kind;inpw.classList.add('focus');
   if(k==='creds'){inpw.classList.add('creds');await typeIn('audit.agent@yourcompany.com',v=>$('#credU').textContent=v,22);await typeIn('••••••••••••',v=>$('#credP').textContent=v,40);}
-  else if(k==='file'){$('#attach').classList.add('on');layout();await sleep(350);await typeIn('Here’s our sales ops policy',v=>inp.value=v);}
+  else if(k==='file'){inpw.classList.remove('focus');if(!AUTO){pickFile();return;}attachFile(POLICY.name,POLICY.size);return;}
   else await typeIn(PEND.text,v=>{inp.value=v;if(PEND&&PEND.onType)PEND.onType(v);});
   inpw.classList.remove('focus');filled=true;suggest($('#send2'));
 }
-inpw.addEventListener('pointerdown',e=>{if(PEND&&!inp.value&&!typing&&!filled){e.preventDefault();autoFill();}});
-$('#clip').onclick=()=>{if(PEND&&PEND.kind==='file')autoFill();else toast('Attach a policy, screenshot or link');};
-$('#attX').onclick=()=>{$('#attach').classList.remove('on');filled=false;inp.value='';layout();};
+/* tapping anywhere in the chat box focuses the input (native keyboard); file step opens the native file picker */
+$('#composer2').addEventListener('click',e=>{if(e.target.closest('button'))return;
+  if(PEND&&PEND.kind==='file'){e.preventDefault();inp.blur();pickFile();return;}
+  inp.focus();if(PEND&&!PEND.manual&&!inp.value&&!typing&&!filled)autoFill();});
+$('#clip').onclick=()=>{if(PEND&&PEND.kind==='file')pickFile();else toast('Attach a policy, screenshot or link');};
+const POLICY={name:'Sales-Ops-Policy-v3.2.pdf',size:'11 KB',pages:5,rules:24,cur:null};
+const fmtSize=b=>b<1024*1024?Math.max(1,Math.round(b/1024))+' KB':(b/1048576).toFixed(1)+' MB';
+const fpk=document.createElement('input');fpk.type='file';fpk.accept='.pdf,.doc,.docx,application/pdf';fpk.style.display='none';document.body.appendChild(fpk);
+function pickFile(){fpk.value='';fpk.click();}
+fpk.addEventListener('change',()=>{const f=fpk.files&&fpk.files[0];if(!f||!PEND||PEND.kind!=='file')return;attachFile(f.name,fmtSize(f.size));});
+function fileMeta(){const c=POLICY.cur;return c.name===POLICY.name?`${POLICY.pages} pages · ${c.size}`:c.size;}
+function attachFile(name,size){POLICY.cur={name,size};$('#attach b').textContent=name;$('#attach span').textContent=fileMeta();$('#attach .ico').textContent=(name.split('.').pop()||'PDF').toUpperCase().slice(0,4);
+  $('#attach').classList.add('on');filled=true;layout();suggest($('#send2'));setTimeout(()=>{if(PEND&&PEND.kind==='file'&&filled)send();},AUTO?300:900);}
+$('#attX').onclick=()=>{$('#attach').classList.remove('on');filled=false;inp.value='';layout();if(PEND&&PEND.kind==='file')suggest($('#clip'));};
 inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send();}});
 $('#send2').onclick=send;
 function clearComposer(){inp.value='';inpw.classList.remove('creds');$('#credU').textContent='';$('#credP').textContent='';$('#attach').classList.remove('on');filled=false;inp.blur();layout();}
@@ -1200,12 +1357,12 @@ function send(){
   if(typing)return;
   if(PEND){const p=PEND,k=p.kind;
     if((k==='creds'||k==='file')&&!filled){autoFill();return;}
-    const t=inp.value.trim();if(!t&&k!=='creds'){autoFill();return;}
+    const t=inp.value.trim();if(!t&&k!=='creds'&&k!=='file'){if(!p.manual)autoFill();return;}
     if(stage.classList.contains('empty')){stage.classList.remove('empty');inp.placeholder='Message Audit Agent...';if(p.before)p.before();setTimeout(layout,20);}
     if(k==='creds')me(`<div class="cr">${P('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>')}audit.agent@yourcompany.com</div><div class="cr">${P('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>')}<span class="dots">••••••••••••</span></div>`);
-    else if(k==='file')me(`<div class="file"><div class="ico">PDF</div><div><b>Sales-Ops-Policy-v3.2.pdf</b><span>14 pages · 412 KB</span></div></div>${esc(t)}`);
+    else if(k==='file')me(`<div class="file"><div class="ico">${$('#attach .ico').textContent}</div><div><b>${esc(POLICY.cur.name)}</b><span>${fileMeta()}</span></div></div>${t?esc(t):''}`);
     else me(esc(t));
-    PEND=null;clearComposer();suggest(null);p.res(t);return;}
+    PEND=null;inp.readOnly=false;if(!stage.classList.contains('empty'))inp.placeholder='Message Audit Agent...';clearComposer();suggest(null);p.res(t);return;}
   const t=inp.value.trim();if(!t)return;me(esc(t));clearComposer();
   ai(`Noted: “${esc(t)}”. I’ll apply it from the next run.`);
 }
@@ -1213,7 +1370,7 @@ function answer(t){if(!PEND)return;inp.value=t;filled=true;send();}
 
 /* ---------- cards ---------- */
 const kvRow=(k,v,done,id)=>`<div class="kv ${done?'done':''}" ${id?`id="${id}"`:''}><span class="k">${k}</span><span class="v ${v?'':'empty'}">${v||''}</span><span class="ok">${IC.check}</span></div>`;
-const SITE=`<i style="background:#ff5c35"></i>HubSpot · Ether trial – Pipeline Health`;
+const SITE=`<i style="background:#ff5c35"></i>HubSpot · Ether Trial`;
 function targetCard(full){return `<div class="card2"><div class="ch2"><b>Audit target</b><span>${full?'Saved to your vault':'Fill in by chat'}</span></div>
   ${kvRow('Site',SITE,true)}${kvRow('Login page','https://app.hubspot.com/login',true)}${kvRow('Username',full?'audit.agent@yourcompany.com':'',false,'kvU')}${kvRow('Password',full?'<span style="letter-spacing:3px">••••••••••••</span>':'',false,'kvP')}
   <div class="cfoot">${IC.lock.replace('stroke="#9aa0a6"','stroke="#16a34a"')}Encrypted at rest. Never shown in screenshots, logs or the recording.</div></div>`;}
@@ -1222,73 +1379,194 @@ function setTl(el,st,txt,right){el.className='tl '+st;const d=$('.d',el);d.inner
 function loginCard(){return `<div class="card2"><div class="ch2"><b>Test login</b><span class="tst">Signing in…</span></div>${tlRow('Opened the HubSpot login page','app.hubspot.com/login','todo')}${tlRow('Entered email and password','','todo')}${tlRow('2-step verification','','todo')}${tlRow('Open the portal','','todo')}</div>`;}
 function codeCard(){return `<div class="card2"><div class="ch2"><b>Verification code</b><span>HubSpot · 2-step verification</span></div><div class="codeb"><div class="codes"><i></i><i></i><i></i><span class="gap"></span><i></i><i></i><i></i></div><p>Type it in the message box. Codes expire in about a minute.</p></div></div>`;}
 function fillCode(card,v){const d=v.replace(/\D/g,'');$$('.codes i',card).forEach((b,i)=>{b.textContent=d[i]||'';b.classList.toggle('f',!!d[i]);});}
-const SECS=[['§3','Pipeline and deals',5],['§4','Leads and prospecting',5],['§5','Quotes and closing',4],['§6','Activity logging',4],['§7','Access and data',3],['§8','Forecasting and goals',3]];
+const SECS=[['§3','Pipeline and deals',3],['§4','Contacts and leads',4],['§5','Quotes and closing',5],['§6','Activity and tasks',3],['§7','Data access and security',3],['§8','Forecasting and goals',2],['§9','Audit and review',4]];
 const TYPES=[['sliders','Sales process compliance','Pipeline, follow-up, activity and forecasting against your policy',1],['db','Data quality','Missing owners, amounts, close dates and duplicates'],['shield','Access & security','Users, seats, permission sets, who can export or delete'],['layers','Full portal audit','All three, every section of the policy']];
 function qCard(title,ids,diff){const n=ids.length,c=ids.reduce((a,id)=>a+qChecks(id),0);
   let rows=ids.map((id,i)=>{const q=Qd(id),add=diff&&id==='H10P';return `<div class="qi ${add?'add':''}"><span class="num">${i+1}</span><div class="qt"><b>${q.t}${add?'<span class="tagx">ADDED</span>':''}</b><span>${q.d}</span></div><span class="clause">${q.cl}</span></div>`;}).join('');
   if(diff){const q=Qd('H10L');rows+=`<div class="qi rem"><span class="num">–</span><div class="qt"><b>${q.t}</b><span>${q.d}</span></div><span class="tagx" style="align-self:flex-start">REMOVED</span><span class="clause">${q.cl}</span></div>`;}
   return `<div class="card2"><div class="ch2"><b>${title}</b><span>${n} questions · ${c} checks</span></div>${rows}</div>`;}
 
-/* ---------- drawer ---------- */
-const DS={hs:'new',policy:false,sched:false,ran:false};
+/* ---------- connectors ---------- */
+Object.assign(PL,{
+ aws:{n:'AWS',a:'AWS',c:'#232f3e',dom:'console.aws.amazon.com'},
+ gcp:{n:'Google Cloud',a:'GC',c:'#4285f4'},azure:{n:'Microsoft Azure',a:'Az',c:'#0078d4'},
+ m365:{n:'Microsoft 365',a:'M',c:'#d83b01'},zd:{n:'Zendesk',a:'Z',c:'#03363d'},jira:{n:'Jira',a:'J',c:'#0052cc'},
+ stripe:{n:'Stripe',a:'S',c:'#635bff'},sap:{n:'SAP',a:'SAP',c:'#0a6ed1'},
+});
+PL.meta.na=0;PL.shop.na=0;PL.custom={n:'Custom',a:'+',c:'#6b7280',dom:'',site:''};
+const CAT=[['hs','https://app.hubspot.com/login','CRM & sales'],['sf','https://login.salesforce.com','CRM & sales'],['ga','https://ads.google.com','Advertising'],['meta','https://business.facebook.com','Advertising'],
+ ['aws','https://signin.aws.amazon.com/console','Cloud'],['gcp','https://console.cloud.google.com','Cloud'],['azure','https://portal.azure.com','Cloud'],
+ ['m365','https://admin.microsoft.com','Workspace'],['shop','https://admin.shopify.com','Commerce'],['stripe','https://dashboard.stripe.com','Payments'],
+ ['zd','https://yourcompany.zendesk.com','Support'],['jira','https://yourcompany.atlassian.net','Engineering'],['sap','https://yourcompany.s4hana.cloud.sap','ERP']];
+const CONN=[
+ {k:'ga',name:'Performance Ads',url:'https://ads.google.com',user:'audit@ether.io',mfa:true,st:'ok'},
+ {k:'sf',name:'Ether Sales Cloud',url:'https://ether.my.salesforce.com',user:'audit@ether.io',mfa:true,st:'ok'},
+ {k:'ga',name:'Brand Search – EU',url:'https://ads.google.com',user:'audit@ether.io',mfa:true,st:'ok',last:'Mon 5 Oct'},
+ {k:'aws',name:'Production Account',url:'https://ether.signin.aws.amazon.com/console',user:'audit-readonly',mfa:true,st:'ok'},
+ {k:'aws',name:'Staging Account',url:'https://ether-staging.signin.aws.amazon.com/console',user:'audit-readonly',mfa:false,st:'run'},
+];
+const DEMO_HS={name:'Ether Trial',url:'https://app.hubspot.com/login',user:'audit.agent@yourcompany.com',pass:'••••••••••••'};
+const connOf=k=>CONN.find(c=>c.k===k);
+const connSubs=new Set();const onConn=f=>{connSubs.add(f);return()=>connSubs.delete(f);};
+function connChange(){renderDrawer();renderHomeChips();if(CP.open)renderConnPage();connSubs.forEach(f=>f());}
+const chipHTML=(c)=>`<button class="cchip" data-k="${c.k}">${pl(c.k)}<span class="cx"><b>${c.name}</b><span>${PL[c.k].n}</span></span></button>`;
+const homeList=()=>{const h=CONN.filter(c=>c.k==='hs');return [...h,...CONN.filter(c=>c.k!=='hs')].slice(0,3);};
+const connOrdered=()=>[...CONN.filter(c=>c.k==='hs'),...CONN.filter(c=>c.k!=='hs')];
+const spin=`<span class="dspin"></span>`;
+const addChipHTML=`<button class="cchip add" data-add="1">${IC.plus}<span class="cx"><b>Add connector</b></span></button>`;
+
+/* drawer */
+const DS={policy:false,sched:false,ran:false};
 function renderDrawer(){
-  const st={new:['new','New'],setup:['new','Setting up'],ok:['ok','Connected'],run:['run','Auditing']}[DS.hs];
+  const stt={ok:['ok','Connected'],run:['run','Auditing']};
+  const di=(ic,b,sp,tail='',cls='')=>`<div class="di ${cls}">${ic}<div class="t"><b>${b}</b><span>${sp}</span></div>${tail}</div>`;
+  const cal=`<span class="ic2">${IC.cal}</span>`,doc=`<span class="ic2">${IC.doc}</span>`,his=`<span class="ic2">${IC.hist}</span>`;
+  const run=[];{const r=RUNS.hs;if(r&&!r.done){const t=r.i<0?'Opening a secure browser…':`Step ${r.i+1} of ${r.steps.length} · ${r.steps[r.i].label}`;run.push(`<div class="di">${pl('hs')}<div class="t"><b>Ether Trial</b><span id="dRunS">${t}</span></div><b class="dpct" id="dRunP">${Math.round(prog(r)*100)}%</b>${spin}</div>`);}}
+  run.push(di(pl('aws'),'Staging Account','Weekly audit · checking IAM roles',`<b class="dpct">64%</b>`+spin));
+  const sch=[...(DS.sched?[di(cal,'HubSpot · daily, weekly, every 2 weeks, monthly','Next: tomorrow 07:00')]:[]),di(cal,'Google Ads · weekly','Mondays 09:00'),di(cal,'Salesforce · monthly','First Monday, 08:00'),di(cal,'AWS · weekly','Fridays 18:00'),di(cal,'Brand Search – EU · every 2 weeks','Wednesdays 10:00')];
+  const pol=[...(DS.policy?[di(doc,(POLICY.cur||POLICY).name,`${POLICY.pages} pages · ${POLICY.rules} rules · HubSpot`)]:[]),di(doc,'Ads-Spend-Guidelines.pdf','8 pages · Google Ads')];
+  const rec=[...(DS.ran?[di(his,'Today · HubSpot','Ether Trial')]:[]),di(his,'Mon 5 Oct · Google Ads','2 critical · 1 good to have'),di(his,'Fri 2 Oct · AWS','1 critical · 4 compliant'),di(his,'Thu 1 Oct · Salesforce','All compliant'),di(his,'Mon 28 Sep · Google Ads','1 critical · 2 good to have')];
+  const sec=(id,title,items)=>{const ex=DEXP.has(id),more=items.length>3;return `<div class="dg dgx"><span>${title}</span>${more?`<button class="dva" data-dx="${id}">${ex?'Show less':'View all'}</button>`:''}</div>${(ex?items:items.slice(0,3)).join('')}`;};
   $('#drawer').innerHTML=`<div class="dhd"><div class="hav" data-spark></div><b>Audit Agent</b><button class="x" id="dX">${IC.x}</button></div>
   <button class="newa" id="dNew">${IC.plus}New audit</button><div class="dbody">
-  <div class="dg">Sites</div>
-  <div class="di on">${pl('hs')}<div class="t"><b>HubSpot</b><span>Ether trial – Pipeline Health</span></div><span class="st2 ${st[0]}">${st[1]}</span></div>
-  <div class="di">${pl('ga')}<div class="t"><b>Google Ads</b><span>Northwind · 482-113-0921</span></div><span class="st2 ok">Connected</span></div>
-  <div class="di">${pl('sf')}<div class="t"><b>Salesforce</b><span>Northwind Sales</span></div><span class="st2 ok">Connected</span></div>
-  <div class="dg">Schedules</div>
-  ${DS.sched?`<div class="di"><span class="ic2">${IC.cal}</span><div class="t"><b>HubSpot · weekly, every 2 weeks, monthly</b><span>Next: Mon 09:00 · overlaps combined</span></div></div>`:''}
-  <div class="di"><span class="ic2">${IC.cal}</span><div class="t"><b>Google Ads · weekly</b><span>Mondays 09:00</span></div></div>
-  <div class="di"><span class="ic2">${IC.cal}</span><div class="t"><b>Salesforce · monthly</b><span>First Monday, 08:00</span></div></div>
-  <div class="dg">Policies</div>
-  ${DS.policy?`<div class="di"><span class="ic2">${IC.doc}</span><div class="t"><b>Sales-Ops-Policy-v3.2.pdf</b><span>14 pages · 24 rules · HubSpot</span></div></div>`:`<div class="di"><span class="ic2">${IC.doc}</span><div class="t"><b>Ads-Spend-Guidelines.pdf</b><span>8 pages · Google Ads</span></div></div>`}
-  <div class="dg">Recent audits</div>
-  ${DS.ran?`<div class="di"><span class="ic2">${IC.hist}</span><div class="t"><b>Today · 3 sites</b><span>HubSpot, Google Ads, Salesforce</span></div></div>`:''}
-  <div class="di"><span class="ic2">${IC.hist}</span><div class="t"><b>Mon 5 Oct · Google Ads</b><span>2 critical · 1 good to have</span></div></div>
-  <div class="di"><span class="ic2">${IC.hist}</span><div class="t"><b>Thu 1 Oct · Salesforce</b><span>1 critical · 1 compliant</span></div></div>
+  <div class="dg dgx"><span>Connectors</span><button class="dva" id="dView">View all</button></div>
+  ${homeList().map(c=>{const s=stt[c.st]||stt.ok;return `<div class="di ${c.k==='hs'?'on':''}">${pl(c.k)}<div class="t"><b>${c.name}</b><span>${PL[c.k].n}</span></div><span class="st2 ${s[0]}">${s[1]}</span></div>`;}).join('')}
+  <button class="dadd2" id="dAdd">${IC.plus}Add connector</button>
+  ${sec('run','Running audits',run)}${sec('sch','Scheduled audits',sch)}${sec('pol','Policies',pol)}${sec('rec','Recent audits',rec)}
   </div><div class="dfoot">${IC.shield}Read-only access. Logins stay in your vault.</div>`;
   icons($('#drawer'));
-  $('#dX').onclick=closeDrawer;$('#dNew').onclick=()=>location.reload();
+  $('#dX').onclick=closeDrawer;$('#dNew').onclick=()=>location.reload();$('#dAdd').onclick=()=>openConnForm();$('#dView').onclick=()=>{closeDrawer();openConnPage();};
+  $$('#drawer [data-dx]').forEach(b=>b.onclick=()=>{const id=b.dataset.dx;DEXP.has(id)?DEXP.delete(id):DEXP.add(id);const sc=$('#drawer .dbody').scrollTop;renderDrawer();$('#drawer .dbody').scrollTop=sc;});
 }
+const DEXP=new Set();
 function openDrawer(){renderDrawer();$('#drawer').classList.add('on');$('#scrim').classList.add('on');}
 function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList.remove('on');}
 $('#menuBtn').onclick=openDrawer;$('#scrim').onclick=closeDrawer;
 
+/* connectors page */
+const CP={open:false};
+function renderConnPage(){
+  const ks=[...new Set(CONN.map(c=>c.k))];const stt={ok:['ok','Connected'],run:['run','Auditing']};
+  $('#cpage').innerHTML=`<div class="cph"><button class="cpb" id="cpBack" aria-label="Back">${IC.left}</button><div class="cpt"><b>Connectors</b><span>${CONN.length} connectors across ${ks.length} sites · logins stay in your vault</span></div><button class="qb pr cpadd" id="cpAdd">${IC.plus}Add connector</button></div>
+  <div class="cpbody">${ks.map(k=>{const L=CONN.filter(c=>c.k===k);return `<section class="cpg"><div class="cpgh">${pl(k)}<b>${PL[k].n}</b><span>${pz(L.length,'connector')}</span></div><div class="cpgrid">${L.map(c=>{const s=stt[c.st]||stt.ok;return `<div class="cpc"><div class="cpc1"><b>${c.name}</b><span class="st2 ${s[0]}">${c.st==='run'?spin:''}${s[1]}</span></div>
+   <div class="cpr"><span>${IC.lock}</span>${c.url.replace('https://','')}</div><div class="cpr"><span>${IC.user||IC.lock}</span>${c.user}</div>
+   <div class="cpf"><em>${c.k==='hs'&&!DS.ran?'Added today':c.last?'Last audit '+c.last:c.st==='run'?'Audit running now':'Last audit Fri 2 Oct'}</em></div></div>`;}).join('')}</div></section>`;}).join('')}</div>`;
+  icons($('#cpage'));$('#cpBack').onclick=closeConnPage;$('#cpAdd').onclick=()=>openConnForm();
+}
+function openConnPage(){CP.open=true;renderConnPage();$('#cpage').classList.add('on');}
+function closeConnPage(){CP.open=false;$('#cpage').classList.remove('on');}
+
+/* home chips */
+function renderHomeChips(){const h=$('#hchips');if(!h)return;h.innerHTML=`<div class="hcl">Your connectors</div><div class="hcc">${homeList().map(chipHTML).join('')}</div><button class="hva" id="hViewAll">View all connectors${IC.right||''}</button>`;$('#hViewAll').onclick=openConnPage;}
+
+/* add connector form */
+const CF={k:null,open:false};
+function openConnForm(){
+  closeDrawer();CF.k=null;CF.open=true;
+  const m=$('#cmodal');m.innerHTML=`<div class="cm"><div class="cmh"><span class="cmi">${IC.link}</span><div><h3>Add connector</h3><p>The agent signs in with these details. They’re stored in your vault, never in chat.</p></div><button class="x" id="cmX">${IC.x}</button></div>
+  <div class="cmb">
+   <label class="fl">Connector</label>
+   <div class="sel" id="cSel"><button class="selb" id="cSelB"><span class="ph">Select a connector</span><span class="chev">${IC.right}</span></button>
+    <div class="dd2" id="cDD">${['CRM & sales','Advertising','Cloud','Workspace','Commerce','Payments','Support','Engineering','ERP'].map(g=>`<div class="ddg">${g}</div>`+CAT.filter(c=>c[2]===g).map(c=>`<button class="ddo" data-k="${c[0]}">${pl(c[0])}<b>${PL[c[0]].n}</b>${connOf(c[0])?'<span class="ddc">Added</span>':''}</button>`).join('')).join('')}<div class="ddg">Other</div><button class="ddo" data-k="custom">${pl('custom')}<b>Custom</b><span class="ddc2">Any site with a login page</span></button></div></div>
+   <label class="fl">Connector name</label><input class="fi" id="fName" placeholder="e.g. Production portal" autocomplete="off">
+   <div id="fUrlW" style="display:none"><label class="fl">Login URL</label><input class="fi" id="fUrl" placeholder="https://" autocomplete="off"></div>
+   <div class="frow"><div><label class="fl">Username or email</label><input class="fi" id="fUser" autocomplete="off"></div><div><label class="fl">Password</label><input class="fi" id="fPass" type="password" autocomplete="new-password"></div></div>
+   <p class="fnote">${IC.shield}If the site asks for a 2-step code during sign-in, I’ll open a secure pop-up for you to enter it. Codes never go in chat.</p>
+  </div>
+  <div class="cmf"><span class="sec">${IC.lock}Encrypted at rest · read-only use</span><button class="qb" id="cmC">Cancel</button><button class="qb pr" id="cmS" disabled>Save connector</button></div></div>`;
+  icons(m);m.classList.add('on');
+  const upd=()=>{$('#cmS').disabled=!(CF.k&&$('#fName').value&&$('#fUrl').value&&$('#fUser').value&&$('#fPass').value);};
+  $('#cmX').onclick=$('#cmC').onclick=closeConnForm;
+  $('#cSelB').onclick=()=>$('#cSel').classList.toggle('open');
+  $$('.ddo',m).forEach(o=>o.onclick=()=>pickConn(o.dataset.k));
+  m.onclick=e=>{if(e.target===m)closeConnForm();};
+  const demo={fName:()=>CF.k==='hs'?DEMO_HS.name:`${PL[CF.k].n} workspace`,fUrl:()=>CF.k==='custom'?'https://portal.yourcompany.com/login':((CAT.find(c=>c[0]===CF.k)||[])[1]||''),fUser:()=>DEMO_HS.user,fPass:()=>'auditagent2026'};
+  ['fName','fUrl','fUser','fPass'].forEach(id=>{const el=$('#'+id);
+    el.addEventListener('input',upd);});
+  $('#cmS').onclick=saveConn;CF.upd=upd;CF.demo=demo;
+  suggestForm();
+}
+function pickConn(k){CF.k=k;$('#cSel').classList.remove('open');$('#cSelB').innerHTML=`${pl(k)}<b>${PL[k].n}</b><span class="chev">${IC.right}</span>`;
+  const u=$('#fUrl');if(k==='custom'){u.value='';$('#fUrlW').style.display='';}else{u.value=(CAT.find(c=>c[0]===k)||[])[1]||'';$('#fUrlW').style.display='none';}CF.upd();suggestForm();}
+function closeConnForm(){CF.open=false;$('#cmodal').classList.remove('on');}
+function suggestForm(){$$('#cmodal .sg').forEach(e=>e.classList.remove('sg'));const n=nextFormEl();if(n)n.classList.add('sg');}
+function nextFormEl(){if(!CF.k)return $('#cSelB');for(const id of ['fName','fUrl','fUser','fPass'])if(!$('#'+id).value)return $('#'+id);return $('#cmS');}
+async function formStep(){if(typing)return;
+  if(!CF.k){if(!$('#cSel').classList.contains('open')){$('#cSel').classList.add('open');return;}pickConn('hs');return;}
+  for(const id of ['fName','fUrl','fUser','fPass']){const el=$('#'+id);if(!el.value){await typeIn(CF.demo[id](),v=>{el.value=v;CF.upd();},id==='fPass'?45:24);suggestForm();return;}}
+  saveConn();}
+$('#cmodal').addEventListener('input',()=>setTimeout(suggestForm,0));
+$('#cmodal').addEventListener('change',()=>setTimeout(suggestForm,0));
+function saveConn(){
+  if($('#cmS').disabled)return;
+  const c={k:CF.k,name:$('#fName').value,url:$('#fUrl').value,user:$('#fUser').value,st:'ok'};
+  const i=c.k==='hs'?CONN.findIndex(x=>x.k==='hs'):-1;if(i>=0)CONN[i]=c;else CONN.push(c);
+  closeConnForm();toast(`${c.name} connected`);connChange();
+}
+document.addEventListener('click',e=>{const ch=e.target.closest('.cchip');if(!ch||ch.closest('.used'))return;
+  if(ch.dataset.add){openConnForm();return;}
+  const k=ch.dataset.k;if(CHIPPICK){CHIPPICK(k,ch);}});
+let CHIPPICK=null;
+
+/* MFA pop-up */
+const MF={open:false,val:'',res:null};
+function openMfa(conn){return new Promise(res=>{MF.open=true;MF.val='';MF.res=res;
+  const m=$('#mmodal');m.innerHTML=`<div class="mm"><div class="mmi">${IC.shield}</div><h3>Verify it’s you</h3><p><b>${PL[conn.k].n} · ${conn.name}</b> is asking for the 6-digit code for <b>${conn.user}</b>.</p>
+   <div class="codes mcodes" id="mCodes"><i></i><i></i><i></i><span class="gap"></span><i></i><i></i><i></i></div>
+   <input id="mIn" inputmode="numeric" maxlength="6" autocomplete="one-time-code" class="mhid">
+   <button class="qb pr mver" id="mVer" disabled>Verify &amp; continue</button>
+   <div class="mnote">${IC.lock}Sent straight to ${PL[conn.k].n}. Never stored, logged, or shown in chat.</div><button class="mcan" id="mCan">Cancel sign-in</button></div>`;
+  icons(m);m.classList.add('on');
+  const draw=()=>{$$('#mCodes i').forEach((b,i)=>{b.textContent=MF.val[i]||'';b.classList.toggle('f',!!MF.val[i]);});$('#mVer').disabled=MF.val.length<6;
+    $$('#mmodal .sg').forEach(e=>e.classList.remove('sg'));(MF.val.length<6?$('#mCodes'):$('#mVer')).classList.add('sg');};
+  MF.draw=draw;draw();
+  $('#mCodes').onclick=()=>{if(!MF.val&&!typing)mfaType();else $('#mIn').focus();};
+  $('#mIn').oninput=()=>{MF.val=$('#mIn').value.replace(/\D/g,'').slice(0,6);draw();};
+  $('#mVer').onclick=()=>{if(MF.val.length<6)return;MF.open=false;m.classList.remove('on');res(true);};
+  $('#mCan').onclick=()=>toast('Sign-in needs the code to continue');
+});}
+async function mfaType(){await typeIn('482913',v=>{MF.val=v;$('#mIn').value=v;MF.draw();},90);}
+async function mfaStep(){if(typing)return;if(MF.val.length<6){await mfaType();return;}$('#mVer').click();}
+
 /* ---------- the conversation ---------- */
 let FINAL=PROPOSED;
 async function flow(){
-  setStage('site');stage.classList.add('empty');inp.placeholder='What would you like to do?';layout();
-  await expect({kind:'text',text:'I want to do an audit',before:()=>{dateChip('Today · new audit');}});
+  setStage('site');stage.classList.add('empty');inp.placeholder='What would you like to do?';layout();renderHomeChips();
+  let picked=null;
+  const homeSuggest=()=>{if(!stage.classList.contains('empty'))return;if(!connOf('hs'))suggest($('#menuBtn'));else suggest(inpw);};
+  const off=onConn(homeSuggest);
+  CHIPPICK=(k,ch)=>{if(!stage.classList.contains('empty'))return;if(k!=='hs'){toast(`${PL[k].n} is audited on its own schedule. Start a HubSpot audit for this demo.`);return;}
+    picked='hs';answer('I want to do an audit on HubSpot');};
+  const p0=expect({kind:'text',manual:true,text:'I want to do an audit.',before:()=>{dateChip('Today · new audit');}});homeSuggest();
+  await p0;off();CHIPPICK=null;
   await sleep(300);
-  await ai(`<b style="font-size:17px">Sure, happy to help 👋</b>`,{ms:600});
-  await ai(`<p>I log into your tools like a person would, check them against your policy, and keep a screenshot as proof for every answer.</p><p>Let’s set it up. <b>Which site should I audit?</b></p>`,{ms:1000});
-  await expect({kind:'text',text:'HubSpot, app.hubspot.com. Our portal is “Ether trial – Pipeline Health”'});
-  DS.hs='setup';
-  await ai(`HubSpot, got it. <b>What’s the login URL?</b> For most portals it’s <b>app.hubspot.com/login</b>. Tell me if you sign in through SSO instead.`);
-  await expect({kind:'text',text:'Yes, https://app.hubspot.com/login'});
-  await ai(`Now the <b>login credentials</b> for the account I should use. A user with view-only permissions is best. I only look, I never change anything.`);
-  await aiCard(targetCard(false),500);
-  await expect({kind:'creds'});
-  const t2=await aiCard(targetCard(true),700);
-  for(const id of ['kvU','kvP']){await sleep(350);$('#'+id,t2).classList.add('done');}
-  const tl=await aiCard(loginCard(),600);const rows=$$('.tl',tl);
-  setTl(rows[0],'run');await sleep(900);setTl(rows[0],'ok');setTl(rows[1],'run');await sleep(1000);setTl(rows[1],'ok');setTl(rows[2],'run');await sleep(900);
-  setTl(rows[2],'warn','2-step verification requested','waiting for code');$('.tst',tl).textContent='Waiting for you';
-  setStage('2fa');await ai(`This HubSpot account has <b>2-step verification</b> on, and it’s waiting for a code. <b>What’s the 6-digit code</b> from your authenticator app or SMS?`);
-  const cc=await aiCard(codeCard(),400);
-  await expect({kind:'code',text:'482 913',onType:v=>fillCode(cc,v)});
-  fillCode(cc,'482913');
-  const tl2=await aiCard(loginCard().replace('Signing in…','Checking code…'),600);const r2=$$('.tl',tl2);
-  setTl(r2[0],'ok');setTl(r2[1],'ok');setTl(r2[2],'run','Checking the 2-step code');await sleep(900);setTl(r2[2],'ok','2-step code accepted','');setTl(r2[3],'run','Opening the portal');await sleep(1000);
-  setTl(r2[3],'ok','Signed in · portal 247617210');$('.tst',tl2).textContent='Signed in';DS.hs='ok';
+  let conn;
+  if(picked){conn=connOf('hs');await ai(`<b style="font-size:17px">Sure, happy to help 👋</b>`,{ms:600});}
+  else{
+    await ai(`<p><b style="font-size:17px">Sure, happy to help 👋</b></p><p>I sign in to your tools like a person would, check them against your policy, and keep a screenshot as proof for every answer. <b>Which connector should I audit?</b></p>`,{ms:1000});
+    const r=newRow(true),col=$('.col',r);const box=document.createElement('div');box.className='qr cpick';col.appendChild(box);
+    let more=false;
+    const draw=()=>{const L=connOrdered(),n=L.length-3;box.innerHTML=(more?L:L.slice(0,3)).map(chipHTML).join('')+`<div class="cpact">${n>0?`<button class="cmore">${more?`View less (${n})<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>`:`View more (${n})<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`}</button>`:''}<button class="cchip add lnk" data-add="1">${IC.plus}<span>Add connector</span></button></div>`;icons(box);const mb=$('.cmore',box);if(mb)mb.onclick=()=>{if(box.classList.contains('used'))return;more=!more;draw();};toBottom();if(!box.classList.contains('used'))suggest(connOf('hs')?$('.cchip[data-k="hs"]',box):$('.cchip.add',box));};
+    draw();const off2=onConn(draw);
+    const k=await new Promise(res=>{CHIPPICK=(k,ch)=>{if(!box.contains(ch))return;if(k!=='hs'){toast(`${PL[k].n} is audited on its own schedule. Pick HubSpot for this demo.`);return;}res(k);};});
+    off2();CHIPPICK=null;box.classList.add('used');$(`.cchip[data-k="${k}"]`,box).classList.add('picked');conn=connOf(k);
+    me(`${PL[k].n} · ${esc(conn.name)}`);
+  }
+  await ai(`Signing in to <b>${PL[conn.k].n} · ${esc(conn.name)}</b> with the login saved in your connector. Your credentials never appear in this chat.`,{ms:800});
+  const tl=await aiCard(`<div class="card2"><div class="ch2"><b>Signing in</b><span class="tst">Connecting…</span></div>${tlRow('Opened the HubSpot login page',conn.url.replace(/^https?:\/\//,''),'todo')}${tlRow('Used the saved login from your vault','','todo')}${tlRow('2-step verification','','todo')}${tlRow('Open the portal','','todo')}</div>`,500);
+  const rows=$$('.tl',tl);
+  setTl(rows[0],'run');await sleep(900);setTl(rows[0],'ok');setTl(rows[1],'run');await sleep(1000);setTl(rows[1],'ok');
+  if(conn.k==='hs'){setTl(rows[2],'run');await sleep(800);
+    setTl(rows[2],'warn','2-step verification requested','waiting for you');$('.tst',tl).textContent='Waiting for code';
+    setStage('2fa');await openMfa(conn);
+    setTl(rows[2],'run','Checking the code','');await sleep(900);setTl(rows[2],'ok','2-step code accepted','');}
+  else setTl(rows[2],'ok','No 2-step verification needed','');
+  setTl(rows[3],'run','Opening the portal');await sleep(1000);setTl(rows[3],'ok','Signed in · portal 247617210');$('.tst',tl).textContent='Signed in';
   setStage('policy');await ai(`Now <b>upload the policy</b> you want me to audit against. PDF, Word or a link all work.`);
   await expect({kind:'file'});DS.policy=true;
-  const rd=await aiCard(`<div class="card2"><div class="ch2"><b>Reading · Sales-Ops-Policy-v3.2</b><span class="rs">14 pages</span></div><div class="readbar"><div class="t"><span>Finding the rules in your policy…</span><span class="pc">0%</span></div><div class="b"><i></i></div></div></div>`,600);
+  const rd=await aiCard(`<div class="card2"><div class="ch2"><b>Reading · ${esc(POLICY.cur.name.replace(/\.[^.]+$/,''))}</b><span class="rs">${POLICY.cur.name===POLICY.name?POLICY.pages+' pages':POLICY.cur.size}</span></div><div class="readbar"><div class="t"><span>Finding the rules in your policy…</span><span class="pc">0%</span></div><div class="b"><i></i></div></div></div>`,600);
   await sleep(50);$('.readbar .b i',rd).style.width='100%';for(let p=0;p<=100;p+=10){$('.readbar .pc',rd).textContent=p+'%';await sleep(150);}
-  $('.ch2 b',rd).textContent='Read · Sales Ops Policy v3.2';$('.rs',rd).textContent='14 pages · 24 rules';
+  $('.ch2 b',rd).textContent='Read · Sales Ops Policy v3.2';$('.rs',rd).textContent=`${POLICY.pages} pages · ${POLICY.rules} rules`;
   $('.readbar',rd).outerHTML=SECS.map(s=>`<div class="sec"><span class="n">${s[0]}</span><span>${s[1]}</span><span class="c">${s[2]} rules</span></div>`).join('');toBottom();
   await ai(`<b style="font-size:17.5px">What type of audit do you want?</b>`,{ms:700});
   const ty=await aiCard(`<div class="card2"><div class="ch2"><b>Audit type · HubSpot</b><span>tap or type</span></div>${TYPES.map(t=>`<div class="opt" data-t="${t[1]}"><span class="oi">${IC[t[0]]}</span><div class="ot"><b>${t[1]}${t[3]?'<span class="best">BEST FIT</span>':''}</b><span>${t[2]}</span></div><span class="radio">${IC.check}</span></div>`).join('')}</div>`,500);
@@ -1323,34 +1601,50 @@ async function flow(){
 }
 
 /* ---------- schedule (bands like the earlier version, overlaps flagged) ---------- */
-const CAD={w:{n:'Weekly',t:'Mon 09:00'},b:{n:'Every 2 weeks',t:'Thu 10:00'},m:{n:'Monthly',t:'1st, 08:00'}};
+const CAD={d:{n:'Daily',t:'Every day, 07:00'},w:{n:'Weekly',t:'Mon 09:00'},b:{n:'Every 2 weeks',t:'Thu 10:00'},m:{n:'Monthly',t:'1st, 08:00'}};
 const SCAD={};
-const OTHER=[['G1','w'],['G2','w'],['G3','b'],['S1','m'],['S2','m']];
-const BOTH=new Set(['H2','G1']);   // checks that also run in the monthly review
+const OTHER=[];
+const BOTH=new Set(['H2','H6']);   // checks that also run in the monthly review
 function schedItems(){return [...FINAL.map(id=>[id,SCAD[id]]),...OTHER];}
 function schedHTML(){
   const items=schedItems();
-  const bands=['w','b','m'].map(c=>{
+  const bands=['d','w','b','m'].map(c=>{
     const rows=items.filter(x=>x[1]===c);
     if(!rows.length)return '';
     return `<div class="band ${c}"><div class="bl"><span>${CAD[c].n}</span></div><div class="rows">${rows.map(([id])=>{const q=Qd(id),inc=BOTH.has(id)&&c!=='m';
-      return `<div class="srow ${inc?'both':''}" data-q="${id}">${pl(q.p)}<b>${q.t}${inc?`<em class="ovt">${IC.merge}Included in monthly report</em>`:''}</b><span class="when">${CAD[c].t}</span><span class="cyc ${c}">${CAD[c].n} ▸</span></div>`;}).join('')}</div></div>`;}).join('');
+      return `<div class="srow ${inc?'both':''}" data-q="${id}">${pl(q.p)}<b>${q.t}${inc?`<em class="ovt">${IC.merge}Included in monthly report</em>`:''}</b><span class="when">${CAD[c].t}</span><button class="cyc ${c}" data-cyc="${id}">${CAD[c].n}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div>`;}).join('')}</div></div>`;}).join('');
   const inc=items.filter(([id,cd])=>BOTH.has(id)&&cd!=='m').length;
-  const note=inc?`<div class="ovnote"><span class="oc">${IC.merge}</span><div><b>Each check runs on one schedule only.</b> ${inc===1?'One weekly check also feeds':'The '+inc+' tagged weekly checks also feed'} the monthly report, using the latest weekly result, so nothing runs twice.</div></div>`:'';
+  const note=inc?`<div class="ovnote"><span class="oc">${IC.merge}</span><div><b>Each check runs on one schedule only.</b> ${inc===1?'One tagged check also feeds':'The '+inc+' tagged checks also feed'} the monthly report, using its latest result, so nothing runs twice.</div></div>`:'';
   return `<div class="sbox">${bands}</div>${note}`;
 }
+function closeCadMenu(){const m=$('#cadMenu');if(m)m.remove();}
+function openCadMenu(btn,id,done){
+  const was=$('#cadMenu');closeCadMenu();if(was&&was.dataset.q===id)return;
+  const cur=SCAD[id]||(OTHER.find(x=>x[0]===id)||[])[1];
+  const m=document.createElement('div');m.id='cadMenu';m.className='cadm';m.dataset.q=id;m.dataset.t=Date.now();
+  m.innerHTML=`<div class="cadh">Run this check</div>`+['d','w','b','m'].map(k=>`<button data-k="${k}" class="${k===cur?'on':''}"><i class="cdot ${k}"></i><span><b>${CAD[k].n}</b><em>${CAD[k].t}</em></span>${k===cur?IC.check:''}</button>`).join('');
+  stage.appendChild(m);
+  const sr=stage.getBoundingClientRect(),sc=sr.width/stage.offsetWidth,br=btn.getBoundingClientRect();
+  let top=(br.bottom-sr.top)/sc+6;const left=Math.max(10,(br.right-sr.left)/sc-m.offsetWidth);
+  if(top+m.offsetHeight>stage.offsetHeight-10)top=(br.top-sr.top)/sc-m.offsetHeight-6;
+  m.style.top=top+'px';m.style.left=left+'px';
+  m.onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;e.stopPropagation();const k=b.dataset.k;
+    if(SCAD[id])SCAD[id]=k;else{const o=OTHER.find(x=>x[0]===id);if(o)o[1]=k;}closeCadMenu();done();};
+}
+document.addEventListener('pointerdown',e=>{const m=$('#cadMenu');if(m&&!m.contains(e.target)&&!e.target.closest('[data-cyc]'))closeCadMenu();});
+chat.addEventListener('scroll',()=>{const m=$('#cadMenu');if(m&&Date.now()-(+m.dataset.t||0)>400)closeCadMenu();});
 async function scheduleFlow(){
   FINAL.forEach(id=>SCAD[id]=SCAD[id]||Qd(id).cad);
-  await ai(`How often should I check? I grouped them by how fast things change. <span style="color:#6b7280">Fast-moving things weekly, settings monthly.</span>`,{ms:900});
-  const c=await aiCard(`<div class="card2 schedc"><div class="ch2"><b>Schedule · 3 sites</b><span>tap a question to change it</span></div><div id="sbody">${schedHTML()}</div><div class="cact"><button class="qb pr" data-a="save">Save schedule</button><button class="qb" data-a="edit">Edit</button></div></div>`,700);
+  await ai(`How often should I check? I grouped them by how fast things change. <span style="color:#6b7280">Fast-moving things daily or weekly, settings monthly.</span>`,{ms:900});
+  const c=await aiCard(`<div class="card2 schedc"><div class="ch2"><b>Schedule · HubSpot</b><span>tap Edit to change how often</span></div><div id="sbody">${schedHTML()}</div><div class="cact"><button class="qb pr" data-a="save">Save schedule</button><button class="qb" data-a="edit">Edit</button></div></div>`,700);
   suggest($('[data-a="save"]',c));
   await new Promise(res=>c.addEventListener('click',e=>{
     const r=e.target.closest('.srow');
     if(r&&!c.classList.contains('locked')){const id=r.dataset.q;if(!c.classList.contains('editing')){c.classList.add('editing');return;}
-      if(SCAD[id]){SCAD[id]={w:'b',b:'m',m:'w'}[SCAD[id]];}else{const o=OTHER.find(x=>x[0]===id);if(o)o[1]={w:'b',b:'m',m:'w'}[o[1]];}
-      $('#sbody',c).innerHTML=schedHTML();icons(c);return;}
+      const cy=e.target.closest('[data-cyc]');if(cy)openCadMenu(cy,id,()=>{$('#sbody',c).innerHTML=schedHTML();icons(c);});return;}
     const a=e.target.closest('[data-a]');if(!a)return;
-    if(a.dataset.a==='edit'){c.classList.toggle('editing');return;}
+    if(a.dataset.a==='edit'){c.classList.toggle('editing');closeCadMenu();return;}
+    closeCadMenu();
     c.classList.remove('editing');c.classList.add('locked');$('.cact',c).innerHTML=`<span style="display:flex;align-items:center;gap:8px;font-size:14.5px;color:#15803d;font-weight:600">${IC.check}Schedule saved</span>`;$('.cact svg',c).style.cssText='width:16px;height:16px';
     DS.sched=true;me('Save schedule');res();}));
 }
@@ -1358,14 +1652,14 @@ async function scheduleFlow(){
 /* ---------- parallel runs ---------- */
 const RUNS={};let order=[];
 async function startAudit(){
-  order=['hs','ga','sf'];
+  order=['hs'];
   order.forEach(k=>RUNS[k]={k,steps:k==='hs'?FINAL.map(id=>STEPS.hs.find(s=>s.q===id)).filter(Boolean):STEPS[k],i:-1,ph:0,done:false,issues:0,passed:0,proofs:0,finds:[],t0:0});
-  DS.hs='run';DS.ran=true;
+  {const c=connOf('hs');if(c)c.st='run';}DS.ran=true;
   setStage('running');$('#recPill').classList.add('on');setStat('Auditing · starting');
-  await ai(`Starting now. <b>Google Ads</b> and <b>Salesforce</b> are also due today on their own schedules, so I’m running all three in parallel, each in its own browser. Tap <b>▶</b> on a site to watch it live.`,{ms:900});
+  await ai(`Starting the HubSpot audit now, in a secure browser signed in as <b>audit-bot</b>. Tap <b>View live</b> below to watch it.`,{ms:900});
   $('#pcards').style.setProperty('--n',order.length);$('#pcards').innerHTML=order.map(k=>`<div class="pc" data-k="${k}"><div class="pt"><b><i style="background:${PL[k].c}"></i><em class="pck">${IC.check}</em>${PL[k].n}</b><span>Starting…</span><div class="pb"><i></i></div></div><button class="pbtn" aria-label="Watch ${PL[k].n}">${IC.play}</button></div>`).join('');
   $('#lvTabs').innerHTML=order.map(k=>`<button data-k="${k}"><i style="background:${PL[k].c}"></i>${PL[k].n}</button>`).join('');
-  $('#rcT').textContent='Auditing 3 sites in parallel';$('#runcard').classList.add('on');
+  $('#rcT').textContent='Auditing HubSpot';$('#runcard').classList.add('on');
   layout();toBottom();suggest($('#viewLive'));
   order.forEach(k=>runLoop(RUNS[k]));tickUI();
 }
@@ -1376,7 +1670,7 @@ async function runLoop(r){
     r.ph=0;ev(r,'start');await sleep(D*.16);r.ph=1;ev(r,'move');await sleep(D*.18);r.ph=2;ev(r,'act');await sleep(D*.12);r.ph=3;ev(r,'scan');await sleep(D*.3);
     r.ph=4;const ex=s.extra||[];r.proofs+=1+ex.length;r.shots=r.shots||[];r.shots.push({q:s.q,cap:s.proof,html:s.html()},...ex.map(e=>({q:s.q,cap:e.cap,html:e.html()})));s.notes.forEach(n=>{n[0]==='bad'?r.issues++:r.passed++;r.finds.push({q:s.q,k:n[0],t:n[1],html:s.html(),cap:s.proof});});ev(r,'find');await sleep(D*.24);
   }
-  r.done=true;r.ms=Date.now()-r.t0;ev(r,'done');if(r.k==='hs')DS.hs='ok';postResult(r);
+  r.done=true;r.ms=Date.now()-r.t0;ev(r,'done');if(r.k==='hs'){const c=connOf('hs');if(c)c.st='ok';}postResult(r);
   if(order.every(k=>RUNS[k].done))allDone();
 }
 function prog(r){if(r.done)return 1;if(r.i<0)return 0;return (r.i+r.ph/5)/r.steps.length;}
@@ -1386,9 +1680,10 @@ function tickUI(){
     $('.pt span',c).textContent=r.done?`${vcount(r).C} critical · ${vcount(r).G} good to have`:r.i<0?'Starting…':r.steps[r.i].label;
     c.classList.toggle('done',r.done);$('.pbtn',c).innerHTML=r.done?IC.dl:IC.play;c.classList.toggle('watch',LV.open&&LV.pk===k);});
   const avg=order.length?sum/order.length:0;$('#ringC').style.strokeDashoffset=138.2*(1-avg);$('#ringT').textContent=Math.round(avg*100)+'%';
-  if(order.some(k=>!RUNS[k].done))$('#rcS').textContent=order.map(k=>{const x=RUNS[k];return `${PL[k].n}: ${x.done?'done':x.i<0?'starting':x.steps[x.i].label.toLowerCase()}`;}).join(' · ');
+  if(order.some(k=>!RUNS[k].done)){const x=RUNS[order[0]];$('#rcS').textContent=x.i<0?'Opening a secure browser…':`Step ${x.i+1} of ${x.steps.length} · ${x.steps[x.i].label}`;}
   const h=RUNS.hs;if(h&&!h.done&&h.i>=0)setStat('Auditing · '+(h.steps[h.i].sec||''));else{const o=order.find(k=>!RUNS[k].done&&RUNS[k].i>=0);if(o)setStat('Auditing · '+PL[o].n);}
   $$('#lvTabs button').forEach(b=>{const r=RUNS[b.dataset.k];b.classList.toggle('on',b.dataset.k===LV.pk);if(r.done&&!$('.ok',b))b.insertAdjacentHTML('beforeend',`<span class="ok">${IC.check}</span>`);});
+  {const d=$('#dRunS'),h=RUNS.hs;if(d&&h&&!h.done&&h.i>=0){d.textContent=`Step ${h.i+1} of ${h.steps.length} · ${h.steps[h.i].label}`;const pp=$('#dRunP');if(pp)pp.textContent=Math.round(prog(h)*100)+'%';}if(h&&h.done&&$('#drawer').classList.contains('on')&&d)renderDrawer();}
   const cur=RUNS[LV.pk];$('#lvR').classList.toggle('dis',!(cur&&cur.done));
 }
 function ev(r,e){tickUI();if(LV.open&&LV.pk===r.k&&!REP.on)vis(r,e);}
@@ -1460,7 +1755,7 @@ async function replay(k){
   }
   if(t!==REP.tok)return;REP.on=false;live.classList.remove('replay');f.done=true;f.proofs=r.proofs;doneState(r);header(r);
 }
-$('#viewLive').onclick=()=>LV.open?closeLive():openLive();
+$('#viewLive').onclick=()=>{if(RUNS.hs&&RUNS.hs.done){openReport('hs');return;}LV.open?closeLive():openLive();};
 $('#lvX').onclick=closeLive;$('#lvExp').onclick=toggleExp;$('#lvR').onclick=()=>replay();
 $('#pcards').addEventListener('click',e=>{const c=e.target.closest('.pc');if(!c)return;const k=c.dataset.k;
   if(RUNS[k].done&&e.target.closest('.pbtn'))openReport(k);else openLive(k);});
@@ -1472,23 +1767,19 @@ function vcount(r){const c={C:0,G:0,K:0};[...new Set(r.steps.map(s=>s.q))].forEa
 const ORD={C:0,G:1,K:2};
 function resItems(r){const ids=[...new Set(r.steps.map(s=>s.q))].sort((a,b)=>ORD[verdict(a,r)]-ORD[verdict(b,r)]);
   return ids.map(id=>{const q=Qd(id),v=verdict(id,r);return `<div class="ri"><div class="tg2">${vchip(v)}${q.cl?`<span class="clause">${q.cl}</span>`:''}</div><b>${q.t}</b><ul>${r.finds.filter(f=>f.q===id).map(f=>`<li class="${f.k}">${IC[f.k]}<span>${f.t}</span></li>`).join('')}</ul></div>`;}).join('');}
-async function postResult(r){
-  const c=vcount(r),sec=Math.round(r.ms/1000);
-  const card=await aiCard(`<div class="card2 rcard"><div class="rhd">${pl(r.k)}<div><h4>${PL[r.k].n} · ${PL[r.k].site}</h4><p>${r.steps.length} questions · ${r.issues+r.passed} checks · ${pz(r.proofs,'proof screenshot')} · ${sec}s</p></div></div>
-   <div class="tally"><div class="C"><b>${c.C}</b><span>Critical</span></div><div class="G"><b>${c.G}</b><span>Good to have</span></div><div class="K"><b>${c.K}</b><span>Compliant</span></div></div>
-   ${resItems(r)}<div class="cact"><button class="qb pr" data-rep>Open report with proof</button><button class="qb" data-rp>↻ Replay</button></div></div>`,600);
-  $('[data-rep]',card).onclick=()=>openReport(r.k);$('[data-rp]',card).onclick=()=>replay(r.k);
-}
+async function postResult(r){}
 async function allDone(){
-  const t={C:0,G:0,K:0};order.forEach(k=>{const c=vcount(RUNS[k]);t.C+=c.C;t.G+=c.G;t.K+=c.K;});const pf=order.reduce((a,k)=>a+RUNS[k].proofs,0);
-  $('#rcT').textContent='All 3 audits complete';$('#rcS').textContent=`${t.C} critical · ${t.G} good to have · ${t.K} compliant · ${pf} proof screenshots`;
+  const r=RUNS.hs,c=vcount(r),sec=Math.round(r.ms/1000);
+  $('#rcT').textContent='HubSpot audit complete';$('#vlT').textContent='Open report';$('#viewLive').querySelector('[data-ic]').innerHTML=IC.dl;$('#rcS').textContent=`${c.C} critical · ${c.G} good to have · ${c.K} compliant · ${r.proofs} proof screenshots`;
   $('#recPill').classList.add('done');$('#recT').textContent='Recording saved';setStat('Online');
-  await sleep(500);
-  const m=await ai(`<p>All 3 audits finished in parallel, in about ${Math.round(Math.max(...order.map(k=>RUNS[k].ms))/1000)} seconds. Every answer has a screenshot behind it.</p>
-   <div class="tally" style="padding:12px 0 2px;border:0"><div class="C"><b>${t.C}</b><span>Critical</span></div><div class="G"><b>${t.G}</b><span>Good to have</span></div><div class="K"><b>${t.K}</b><span>Compliant</span></div></div>
-   <p style="font-size:14px;color:#6b7280;margin-top:10px"><b style="color:#b91c1c">Critical</b>: breaks a must-have rule in your policy. <b style="color:#b45309">Good to have</b>: a recommended rule isn't met yet. <b style="color:#15803d">Compliant</b>: meets the policy.</p>
-   <div class="bubacts"><button class="qb pr" id="dlAll">Open full report</button>${DS.sched?'':'<button class="qb" id="setS">Put it on a schedule</button>'}</div>`);
-  $('#dlAll').onclick=()=>openReport('hs');suggest($('#dlAll'));if(AUTO&&STAGES[TARGET]&&STAGES[TARGET][0]==='report'){openReport('hs');stopAuto();}
+  await sleep(400);
+  const card=await aiCard(`<div class="card2 rcard"><div class="rhd">${pl(r.k)}<div><h4>${PL[r.k].n} · ${PL[r.k].site}</h4><p>${r.steps.length} questions · ${r.issues+r.passed} checks · ${pz(r.proofs,'proof screenshot')} · ${sec}s</p></div></div>
+   <div class="rsum"><p>That’s everything. ${FINAL.length} questions checked in about ${sec} seconds, with a screenshot behind every answer and nothing changed in HubSpot.</p></div>
+   <div class="tally"><div class="C"><b>${c.C}</b><span>Critical</span></div><div class="G"><b>${c.G}</b><span>Good to have</span></div><div class="K"><b>${c.K}</b><span>Compliant</span></div></div>
+   ${resItems(r)}
+   <div class="rlegend"><b style="color:#b91c1c">Critical</b>: breaks a must-have rule in your policy. <b style="color:#b45309">Good to have</b>: a recommended rule isn't met yet. <b style="color:#15803d">Compliant</b>: meets the policy.</div>
+   <div class="cact"><button class="qb pr" id="dlAll">Open report</button><button class="qb" data-rp>↻ Replay</button>${DS.sched?'':'<button class="qb" id="setS">Put it on a schedule</button>'}</div></div>`,600);
+  $('#dlAll').onclick=()=>openReport('hs');$('[data-rp]',card).onclick=()=>replay('hs');suggest($('#dlAll'));if(AUTO&&STAGES[TARGET]&&STAGES[TARGET][0]==='report'){openReport('hs');stopAuto();}
   const s=$('#setS');if(s)s.onclick=async()=>{s.disabled=true;me('Put it on a schedule');await scheduleFlow();await ai(`Saved. I’ll repeat this on schedule and only message you when something changes.`);};
 }
 /* ---------- report visuals ---------- */
@@ -1543,7 +1834,7 @@ function openReport(k){
 $('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet')$('#sheet').classList.remove('on');});
 
 /* ---------- presenter bar ---------- */
-const STAGES=[['site','Site & login'],['2fa','2-step code'],['policy','Policy & audit type'],['questions','Review questions'],['schedule','Schedule'],['running','Audit running'],['live','Live link'],['report','Report']];
+const STAGES=[['site','Connector'],['2fa','2-step code'],['policy','Policy & audit type'],['questions','Review questions'],['schedule','Schedule'],['running','Audit running'],['live','Live link'],['report','Report']];
 let STG=-1,AUTO=false,TARGET=-1;
 function renderBar(){
   $('#pSteps').innerHTML=STAGES.map((s,i)=>`<button class="ps ${i<STG?'done':i===STG?'on':''}" data-i="${i}"><i></i>${s[1]}</button>`).join('');
@@ -1554,6 +1845,10 @@ function setStage(id){const i=STAGES.findIndex(s=>s[0]===id);if(i>STG){STG=i;if(
 function canClick(el){return el&&document.body.contains(el)&&!el.disabled&&!el.closest('.used,.locked')&&!el.classList.contains('picked')&&el.offsetParent!==null;}
 function advance(){
   if(typing)return;
+  if(CF.open){formStep();return;}
+  if(MF.open){mfaStep();return;}
+  if(CP.open){closeConnPage();return;}
+  if(stage.classList.contains('empty')&&!connOf('hs')){openConnForm();return;}
   if(PEND&&!filled){autoFill();return;}
   if(PEND&&filled){send();return;}
   if(canClick(sgEl)){sgEl.click();}
@@ -1577,8 +1872,8 @@ $('#pSteps').addEventListener('click',e=>{const b=e.target.closest('.ps');if(!b)
 /* ---------- keys ---------- */
 addEventListener('keydown',e=>{
   if(document.activeElement===inp&&inp.value&&e.key!=='Enter')return;
-  if(e.key==='Escape'){if($('#sheet').classList.contains('on'))$('#sheet').classList.remove('on');else if($('#drawer').classList.contains('on'))closeDrawer();else if(LV.open)closeLive();}
-  if(e.key==='ArrowRight'||(e.key===' '&&document.activeElement!==inp)){e.preventDefault();if(AUTO)stopAuto();advance();}
+  if(e.key==='Escape'){if(CF.open){closeConnForm();return;}if(CP.open){closeConnPage();return;}if($('#sheet').classList.contains('on'))$('#sheet').classList.remove('on');else if($('#drawer').classList.contains('on'))closeDrawer();else if(LV.open)closeLive();}
+  if((e.key==='ArrowRight'&&!document.activeElement.closest('#cmodal'))||(e.key===' '&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName))){e.preventDefault();if(AUTO)stopAuto();advance();}
 });
 window.__demo={get STG(){return STG;},get AUTO(){return AUTO;},RUNS,LV,openLive,toggleExp,closeLive,openReport,replay,autoFill,send,get PEND(){return PEND;},get filled(){return filled;},get typing(){return typing;}};
 renderDrawer();renderBar();layout();setTimeout(layout,100);flow();
