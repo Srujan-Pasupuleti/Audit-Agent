@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
@@ -934,7 +933,7 @@ body.hasbar #pbar{display:flex}
 
 .hva{display:flex;align-items:center;gap:4px;margin:12px auto 0;background:none;border:0;padding:6px 10px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;line-height:1;color:var(--g500,#6b7280);cursor:pointer}.hva:hover{color:var(--g900,#111827);background:rgba(0,0,0,.04)}.hva svg{width:14px;height:14px}
 
-.rsum{padding:14px 20px 4px;font-size:15px;line-height:1.55;color:#111827}.rsum p{margin:0}
+.rsum2{padding:14px 20px 4px;font-size:15px;line-height:1.55;color:#111827}.rsum2 p{margin:0}
 .rlegend{padding:12px 20px;font-size:13px;line-height:1.5;color:#6b7280;border-top:1px solid #f0f1f4}
 
 .dgb{display:flex;align-items:center;gap:6px}
@@ -990,6 +989,35 @@ body.hasbar #pbar{display:flex}
 .scan{display:none!important}
 .shot{border:0!important;box-shadow:none!important}
 .shot::before{display:none}
+
+/* no guided-demo nudges */
+.sg,.sg2,.clip.sg2,.inpw.sg2,.fck.sg,.mcodes.sg{animation:none!important}
+.clip.sg2{color:inherit;border-color:var(--g200)}
+.inpw.sg2{border-color:var(--g200)}
+.fi.sg:not(:focus),.selb.sg{border-color:var(--g200);box-shadow:none}
+.fck.sg{border-color:var(--g200)}
+#stage.empty #composer2:has(.inpw.sg2):not(:has(.inpw.focus)):not(:focus-within){border-color:var(--g200);box-shadow:0 14px 40px rgba(16,24,40,.08)}
+
+.mcw{position:relative}
+.mov{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;border:0;background:transparent;color:transparent;caret-color:transparent;cursor:pointer}
+.mcodes.foc i{border-color:#ff6a3d}
+
+/* calmer schedule */
+.schedc .sbox{background:transparent;margin:6px 14px 14px;padding:0;gap:6px}
+.schedc .band .bl,.band.d .bl,.band.w .bl,.band.b .bl,.band.m .bl{background:transparent!important;color:var(--g900)!important;padding:12px 4px 8px;border-radius:0}
+.schedc .band .bl span{font-size:15px;font-weight:750}
+.schedc .band .rows{background:transparent;padding:0;border-radius:0}
+.schedc .band .rows .srow{background:#fff;border:1px solid var(--g200)}
+.schedc .srow.both:not(.dup){border-color:var(--g200)}
+.schedc.editing .srow{border-style:solid;border-color:var(--g200)}
+.cyc.d,.cyc.w,.cyc.b,.cyc.m{background:var(--g100);color:var(--g700,#374151)}
+/* question checkboxes */
+.qi .qcb{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--g300,#d1d5db);background:#fff;flex:0 0 24px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:3px;padding:0;color:#fff;transition:background .15s,border-color .15s}
+.qi .qcb svg{width:15px;height:15px;opacity:0}
+.qi .qcb.on{background:var(--g900);border-color:var(--g900)}.qi .qcb.on svg{opacity:1}
+.qi.off .qt{opacity:.45}.qi.off .qt b{text-decoration:line-through}
+.locked .qcb{pointer-events:none}
+.schedc .ovnote{background:var(--g50,#f9fafb);border-color:var(--g200)}
 </style></head><body>
 <div id="vp"><div id="stage">
   <div class="sbar"><span id="clock">06:53</span><span class="bat">100% <i></i></span></div>
@@ -1345,10 +1373,14 @@ const POLICY={name:'Sales-Ops-Policy-v3.2.pdf',size:'11 KB',pages:5,rules:24,cur
 const fmtSize=b=>b<1024*1024?Math.max(1,Math.round(b/1024))+' KB':(b/1048576).toFixed(1)+' MB';
 const fpk=document.createElement('input');fpk.type='file';fpk.accept='.pdf,.doc,.docx,application/pdf';fpk.style.display='none';document.body.appendChild(fpk);
 function pickFile(){fpk.value='';fpk.click();}
-fpk.addEventListener('change',()=>{const f=fpk.files&&fpk.files[0];if(!f||!PEND||PEND.kind!=='file')return;attachFile(f.name,fmtSize(f.size));});
+fpk.addEventListener('change',async()=>{const f=fpk.files&&fpk.files[0];if(!f||!PEND||PEND.kind!=='file')return;
+  let ok=false;try{const head=new TextDecoder('latin1').decode(await f.arrayBuffer());ok=/%PDF-/.test(head.slice(0,1024))&&/Ether Sales Operations Policy/.test(head);}catch(e){}
+  if(!ok){rejectFile(f.name);return;}attachFile(f.name,fmtSize(f.size));});
+function rejectFile(name){$('#attach').classList.remove('on');filled=false;layout();
+  ai(`<p><b>That file doesn’t look like a policy.</b> “${esc(name)}” isn’t the sales ops policy I can audit against.</p><p style="color:#6b7280">Please upload your policy document (PDF).</p>`,{ms:500});}
 function fileMeta(){const c=POLICY.cur;return c.name===POLICY.name?`${POLICY.pages} pages · ${c.size}`:c.size;}
 function attachFile(name,size){POLICY.cur={name,size};$('#attach b').textContent=name;$('#attach span').textContent=fileMeta();$('#attach .ico').textContent=(name.split('.').pop()||'PDF').toUpperCase().slice(0,4);
-  $('#attach').classList.add('on');filled=true;layout();suggest($('#send2'));setTimeout(()=>{if(PEND&&PEND.kind==='file'&&filled)send();},AUTO?300:900);}
+  $('#attach').classList.add('on');filled=true;layout();setTimeout(()=>{layout();toBottom();},60);suggest($('#send2'));if(AUTO)setTimeout(()=>{if(PEND&&PEND.kind==='file'&&filled)send();},300);}
 $('#attX').onclick=()=>{$('#attach').classList.remove('on');filled=false;inp.value='';layout();if(PEND&&PEND.kind==='file')suggest($('#clip'));};
 inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send();}});
 $('#send2').onclick=send;
@@ -1358,13 +1390,28 @@ function send(){
   if(PEND){const p=PEND,k=p.kind;
     if((k==='creds'||k==='file')&&!filled){autoFill();return;}
     const t=inp.value.trim();if(!t&&k!=='creds'&&k!=='file'){if(!p.manual)autoFill();return;}
-    if(stage.classList.contains('empty')){stage.classList.remove('empty');inp.placeholder='Message Audit Agent...';if(p.before)p.before();setTimeout(layout,20);}
+    if(stage.classList.contains('empty')){stage.classList.remove('empty');inp.placeholder='Message Audit Agent...';if(p.before){p.before();p.before=null;}setTimeout(layout,20);}
+    if(k==='text'&&p.check&&!p.check(t)){me(esc(t));clearComposer();offTopic(t);return;}
     if(k==='creds')me(`<div class="cr">${P('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>')}audit.agent@yourcompany.com</div><div class="cr">${P('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>')}<span class="dots">••••••••••••</span></div>`);
     else if(k==='file')me(`<div class="file"><div class="ico">${$('#attach .ico').textContent}</div><div><b>${esc(POLICY.cur.name)}</b><span>${fileMeta()}</span></div></div>${t?esc(t):''}`);
     else me(esc(t));
     PEND=null;inp.readOnly=false;if(!stage.classList.contains('empty'))inp.placeholder='Message Audit Agent...';clearComposer();suggest(null);p.res(t);return;}
   const t=inp.value.trim();if(!t)return;me(esc(t));clearComposer();
   ai(`Noted: “${esc(t)}”. I’ll apply it from the next run.`);
+}
+/* intent check for the opening message */
+const AUDIT_RX=/\b(audit|auditing|compliance|compliant|policy|check(ing)?|review|inspect|assess|scan|verify|health ?check)\b/i;
+const YES_RX=/^\s*(yes|yeah|yep|sure|ok(ay)?|go ahead|let'?s do it|please|y)\b/i;
+const ACT_RX=/\b(send|email|write|draft|create|make|build|delete|remove|update|change|edit|book|schedule a meeting|call|buy|order|post|publish|translate|generate|design|code|fix|move|pay|transfer)\b/i;
+let NUDGED=false;
+function isAuditIntent(t){return AUDIT_RX.test(t)||(NUDGED&&YES_RX.test(t));}
+async function offTopic(t){
+  const cant=ACT_RX.test(t);
+  const lead=cant?`That’s not something I can do just yet. I’m built to audit your tools against your policy.`
+                 :`Sorry, I didn’t quite catch that. I’m here to audit your tools against your policy.`;
+  NUDGED=true;
+  const m=await ai(`<p>${lead}</p><p><b>Would you like to run an audit?</b></p><div class="bubacts"><button class="qb pr">Yes, start an audit</button></div>`,{ms:700});
+  const b=$('.bubacts .qb',m);b.onclick=()=>{if(!PEND||!PEND.check)return;$('.bubacts',m).classList.add('qr','used');b.classList.add('picked');answer('Yes, start an audit');};
 }
 function answer(t){if(!PEND)return;inp.value=t;filled=true;send();}
 
@@ -1382,9 +1429,13 @@ function fillCode(card,v){const d=v.replace(/\D/g,'');$$('.codes i',card).forEac
 const SECS=[['§3','Pipeline and deals',3],['§4','Contacts and leads',4],['§5','Quotes and closing',5],['§6','Activity and tasks',3],['§7','Data access and security',3],['§8','Forecasting and goals',2],['§9','Audit and review',4]];
 const TYPES=[['sliders','Sales process compliance','Pipeline, follow-up, activity and forecasting against your policy',1],['db','Data quality','Missing owners, amounts, close dates and duplicates'],['shield','Access & security','Users, seats, permission sets, who can export or delete'],['layers','Full portal audit','All three, every section of the policy']];
 function qCard(title,ids,diff){const n=ids.length,c=ids.reduce((a,id)=>a+qChecks(id),0);
-  let rows=ids.map((id,i)=>{const q=Qd(id),add=diff&&id==='H10P';return `<div class="qi ${add?'add':''}"><span class="num">${i+1}</span><div class="qt"><b>${q.t}${add?'<span class="tagx">ADDED</span>':''}</b><span>${q.d}</span></div><span class="clause">${q.cl}</span></div>`;}).join('');
-  if(diff){const q=Qd('H10L');rows+=`<div class="qi rem"><span class="num">–</span><div class="qt"><b>${q.t}</b><span>${q.d}</span></div><span class="tagx" style="align-self:flex-start">REMOVED</span><span class="clause">${q.cl}</span></div>`;}
-  return `<div class="card2"><div class="ch2"><b>${title}</b><span>${n} questions · ${c} checks</span></div>${rows}</div>`;}
+  let rows=ids.map((id,i)=>{const q=Qd(id),add=diff&&id==='H10P';return `<div class="qi ${add?'add':''}" data-q="${id}"><button class="qcb on" aria-label="Include question">${IC.check}</button><div class="qt"><b>${q.t}${add?'<span class="tagx">ADDED</span>':''}</b><span>${q.d}</span></div><span class="clause">${q.cl}</span></div>`;}).join('');
+  if(diff){const q=Qd('H10L');rows+=`<div class="qi rem off" data-q="H10L"><button class="qcb" aria-label="Include question">${IC.check}</button><div class="qt"><b>${q.t}</b><span>${q.d}</span></div><span class="tagx" style="align-self:flex-start">REMOVED</span><span class="clause">${q.cl}</span></div>`;}
+  return `<div class="card2 qcard"><div class="ch2"><b>${title}</b><span class="qcnt">${n} questions · ${c} checks</span></div>${rows}</div>`;}
+function qSel(card){return $$('.qi',card).filter(r=>!r.classList.contains('off')).map(r=>r.dataset.q);}
+document.addEventListener('click',e=>{const b=e.target.closest('.qcb');if(!b)return;const card=b.closest('.qcard');if(!card||b.closest('.locked'))return;
+  const r=b.closest('.qi');const on=!b.classList.contains('on');b.classList.toggle('on',on);r.classList.toggle('off',!on);
+  const ids=qSel(card);$('.qcnt',card).textContent=`${ids.length} questions · ${ids.reduce((a,id)=>a+qChecks(id),0)} checks`;});
 
 /* ---------- connectors ---------- */
 Object.assign(PL,{
@@ -1422,7 +1473,7 @@ function renderDrawer(){
   const di=(ic,b,sp,tail='',cls='')=>`<div class="di ${cls}">${ic}<div class="t"><b>${b}</b><span>${sp}</span></div>${tail}</div>`;
   const cal=`<span class="ic2">${IC.cal}</span>`,doc=`<span class="ic2">${IC.doc}</span>`,his=`<span class="ic2">${IC.hist}</span>`;
   const run=[];{const r=RUNS.hs;if(r&&!r.done){const t=r.i<0?'Opening a secure browser…':`Step ${r.i+1} of ${r.steps.length} · ${r.steps[r.i].label}`;run.push(`<div class="di">${pl('hs')}<div class="t"><b>Ether Trial</b><span id="dRunS">${t}</span></div><b class="dpct" id="dRunP">${Math.round(prog(r)*100)}%</b>${spin}</div>`);}}
-  run.push(di(pl('aws'),'Staging Account','Weekly audit · checking IAM roles',`<b class="dpct">64%</b>`+spin));
+  run.push(di(pl('aws'),'Staging Account','Weekly audit · checking IAM roles',`<b class="dpct" id="dStgP">${stgPct()}%</b>`+spin));
   const sch=[...(DS.sched?[di(cal,'HubSpot · daily, weekly, every 2 weeks, monthly','Next: tomorrow 07:00')]:[]),di(cal,'Google Ads · weekly','Mondays 09:00'),di(cal,'Salesforce · monthly','First Monday, 08:00'),di(cal,'AWS · weekly','Fridays 18:00'),di(cal,'Brand Search – EU · every 2 weeks','Wednesdays 10:00')];
   const pol=[...(DS.policy?[di(doc,(POLICY.cur||POLICY).name,`${POLICY.pages} pages · ${POLICY.rules} rules · HubSpot`)]:[]),di(doc,'Ads-Spend-Guidelines.pdf','8 pages · Google Ads')];
   const rec=[...(DS.ran?[di(his,'Today · HubSpot','Ether Trial')]:[]),di(his,'Mon 5 Oct · Google Ads','2 critical · 1 good to have'),di(his,'Fri 2 Oct · AWS','1 critical · 4 compliant'),di(his,'Thu 1 Oct · Salesforce','All compliant'),di(his,'Mon 28 Sep · Google Ads','1 critical · 2 good to have')];
@@ -1439,6 +1490,8 @@ function renderDrawer(){
   $$('#drawer [data-dx]').forEach(b=>b.onclick=()=>{const id=b.dataset.dx;DEXP.has(id)?DEXP.delete(id):DEXP.add(id);const sc=$('#drawer .dbody').scrollTop;renderDrawer();$('#drawer .dbody').scrollTop=sc;});
 }
 const DEXP=new Set();
+const STG0=Date.now();function stgPct(){return Math.min(99,Math.floor(38+(Date.now()-STG0)/(22*60*1000)*62));}
+setInterval(()=>{const e=$('#dStgP');if(e)e.textContent=stgPct()+'%';},5000);
 function openDrawer(){renderDrawer();$('#drawer').classList.add('on');$('#scrim').classList.add('on');}
 function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList.remove('on');}
 $('#menuBtn').onclick=openDrawer;$('#scrim').onclick=closeDrawer;
@@ -1501,8 +1554,9 @@ function saveConn(){
   if($('#cmS').disabled)return;
   const c={k:CF.k,name:$('#fName').value,url:$('#fUrl').value,user:$('#fUser').value,st:'ok'};
   const i=c.k==='hs'?CONN.findIndex(x=>x.k==='hs'):-1;if(i>=0)CONN[i]=c;else CONN.push(c);
-  closeConnForm();toast(`${c.name} connected`);connChange();
+  closeConnForm();toast(`${c.name} connected`);connChange();if(ONADD)ONADD(c);
 }
+let ONADD=null;
 document.addEventListener('click',e=>{const ch=e.target.closest('.cchip');if(!ch||ch.closest('.used'))return;
   if(ch.dataset.add){openConnForm();return;}
   const k=ch.dataset.k;if(CHIPPICK){CHIPPICK(k,ch);}});
@@ -1512,16 +1566,18 @@ let CHIPPICK=null;
 const MF={open:false,val:'',res:null};
 function openMfa(conn){return new Promise(res=>{MF.open=true;MF.val='';MF.res=res;
   const m=$('#mmodal');m.innerHTML=`<div class="mm"><div class="mmi">${IC.shield}</div><h3>Verify it’s you</h3><p><b>${PL[conn.k].n} · ${conn.name}</b> is asking for the 6-digit code for <b>${conn.user}</b>.</p>
-   <div class="codes mcodes" id="mCodes"><i></i><i></i><i></i><span class="gap"></span><i></i><i></i><i></i></div>
-   <input id="mIn" inputmode="numeric" maxlength="6" autocomplete="one-time-code" class="mhid">
+   <div class="mcw"><div class="codes mcodes" id="mCodes"><i></i><i></i><i></i><span class="gap"></span><i></i><i></i><i></i></div>
+   <input id="mIn" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" class="mov" aria-label="6-digit code"></div>
    <button class="qb pr mver" id="mVer" disabled>Verify &amp; continue</button>
    <div class="mnote">${IC.lock}Sent straight to ${PL[conn.k].n}. Never stored, logged, or shown in chat.</div><button class="mcan" id="mCan">Cancel sign-in</button></div>`;
   icons(m);m.classList.add('on');
   const draw=()=>{$$('#mCodes i').forEach((b,i)=>{b.textContent=MF.val[i]||'';b.classList.toggle('f',!!MF.val[i]);});$('#mVer').disabled=MF.val.length<6;
     $$('#mmodal .sg').forEach(e=>e.classList.remove('sg'));(MF.val.length<6?$('#mCodes'):$('#mVer')).classList.add('sg');};
   MF.draw=draw;draw();
-  $('#mCodes').onclick=()=>{if(!MF.val&&!typing)mfaType();else $('#mIn').focus();};
-  $('#mIn').oninput=()=>{MF.val=$('#mIn').value.replace(/\D/g,'').slice(0,6);draw();};
+  $('#mIn').oninput=()=>{MF.val=$('#mIn').value.replace(/\D/g,'').slice(0,6);$('#mIn').value=MF.val;draw();};
+  $('#mIn').onfocus=()=>$('#mCodes').classList.add('foc');$('#mIn').onblur=()=>$('#mCodes').classList.remove('foc');
+  $('#mIn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#mVer').click();}};
+  setTimeout(()=>{try{$('#mIn').focus();}catch(e){}},250);
   $('#mVer').onclick=()=>{if(MF.val.length<6)return;MF.open=false;m.classList.remove('on');res(true);};
   $('#mCan').onclick=()=>toast('Sign-in needs the code to continue');
 });}
@@ -1537,18 +1593,18 @@ async function flow(){
   const off=onConn(homeSuggest);
   CHIPPICK=(k,ch)=>{if(!stage.classList.contains('empty'))return;if(k!=='hs'){toast(`${PL[k].n} is audited on its own schedule. Start a HubSpot audit for this demo.`);return;}
     picked='hs';answer('I want to do an audit on HubSpot');};
-  const p0=expect({kind:'text',manual:true,text:'I want to do an audit.',before:()=>{dateChip('Today · new audit');}});homeSuggest();
+  const p0=expect({kind:'text',manual:true,check:isAuditIntent,text:'I want to do an audit.',before:()=>{dateChip('Today · new audit');}});homeSuggest();
   await p0;off();CHIPPICK=null;
   await sleep(300);
   let conn;
   if(picked){conn=connOf('hs');await ai(`<b style="font-size:17px">Sure, happy to help 👋</b>`,{ms:600});}
   else{
-    await ai(`<p><b style="font-size:17px">Sure, happy to help 👋</b></p><p>I sign in to your tools like a person would, check them against your policy, and keep a screenshot as proof for every answer. <b>Which connector should I audit?</b></p>`,{ms:1000});
+    await ai(`<p><b style="font-size:17px">Sure, happy to help 👋</b></p><p>I sign in to your tools like a person would, check them against your policy, and keep a screenshot as proof for every answer. <b>Which connector should I use for this audit?</b></p>`,{ms:1000});
     const r=newRow(true),col=$('.col',r);const box=document.createElement('div');box.className='qr cpick';col.appendChild(box);
     let more=false;
     const draw=()=>{const L=connOrdered(),n=L.length-3;box.innerHTML=(more?L:L.slice(0,3)).map(chipHTML).join('')+`<div class="cpact">${n>0?`<button class="cmore">${more?`View less (${n})<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>`:`View more (${n})<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`}</button>`:''}<button class="cchip add lnk" data-add="1">${IC.plus}<span>Add connector</span></button></div>`;icons(box);const mb=$('.cmore',box);if(mb)mb.onclick=()=>{if(box.classList.contains('used'))return;more=!more;draw();};toBottom();if(!box.classList.contains('used'))suggest(connOf('hs')?$('.cchip[data-k="hs"]',box):$('.cchip.add',box));};
     draw();const off2=onConn(draw);
-    const k=await new Promise(res=>{CHIPPICK=(k,ch)=>{if(!box.contains(ch))return;if(k!=='hs'){toast(`${PL[k].n} is audited on its own schedule. Pick HubSpot for this demo.`);return;}res(k);};});
+    const k=await new Promise(res=>{CHIPPICK=(k,ch)=>{if(!box.contains(ch))return;if(k!=='hs'){toast(`${PL[k].n} is audited on its own schedule. Pick HubSpot for this demo.`);return;}res(k);};ONADD=c=>{if(c.k==='hs')setTimeout(()=>res('hs'),350);};});ONADD=null;
     off2();CHIPPICK=null;box.classList.add('used');$(`.cchip[data-k="${k}"]`,box).classList.add('picked');conn=connOf(k);
     me(`${PL[k].n} · ${esc(conn.name)}`);
   }
@@ -1562,7 +1618,7 @@ async function flow(){
     setTl(rows[2],'run','Checking the code','');await sleep(900);setTl(rows[2],'ok','2-step code accepted','');}
   else setTl(rows[2],'ok','No 2-step verification needed','');
   setTl(rows[3],'run','Opening the portal');await sleep(1000);setTl(rows[3],'ok','Signed in · portal 247617210');$('.tst',tl).textContent='Signed in';
-  setStage('policy');await ai(`Now <b>upload the policy</b> you want me to audit against. PDF, Word or a link all work.`);
+  setStage('policy');await ai(`Now <b>upload the policy</b> you want me to audit against, as a PDF.`);
   await expect({kind:'file'});DS.policy=true;
   const rd=await aiCard(`<div class="card2"><div class="ch2"><b>Reading · ${esc(POLICY.cur.name.replace(/\.[^.]+$/,''))}</b><span class="rs">${POLICY.cur.name===POLICY.name?POLICY.pages+' pages':POLICY.cur.size}</span></div><div class="readbar"><div class="t"><span>Finding the rules in your policy…</span><span class="pc">0%</span></div><div class="b"><i></i></div></div></div>`,600);
   await sleep(50);$('.readbar .b i',rd).style.width='100%';for(let p=0;p<=100;p+=10){$('.readbar .pc',rd).textContent=p+'%';await sleep(150);}
@@ -1574,7 +1630,7 @@ async function flow(){
   const pick=await expect({kind:'text',text:'Sales process compliance'});
   const sel=$$('.opt',ty).find(o=>pick.toLowerCase().includes(o.dataset.t.toLowerCase().split(' ')[0]))||$('.opt',ty);sel.classList.add('sel');ty.classList.add('locked');
   setStage('questions');await ai(`Here are the questions I’ll answer in HubSpot, each linked to the policy clause it tests. <b>Please check them</b>, and remove, reword or add anything before I start.`,{ms:1100});
-  await aiCard(qCard('Proposed questions',PROPOSED),700);
+  let qc=await aiCard(qCard('Proposed questions',PROPOSED),700);
   const EDIT='Drop #10, we haven’t closed any deals yet. And add: is the Prospecting Agent ready to use?';
   const q1=chips(['Looks good','Edit Questions']);
   const res1=await new Promise(res=>{
@@ -1585,10 +1641,11 @@ async function flow(){
   });
   if(res1==='edit'){
     useChips(q1);FINAL=REVISED;
-    await aiCard(qCard('Revised questions',REVISED,true),1100);
+    qc.classList.add('locked');qc=await aiCard(qCard('Revised questions',REVISED,true),1100);
     const q2=chips(['Confirm questions','Edit again'],'Confirm questions');suggest($('.qb.pr',q2));
     await new Promise(res=>$$('.qb',q2).forEach(b=>b.onclick=()=>{if(b.textContent==='Edit again'){toast('Tell me what to change in the message box');return;}useChips(q2,b);me('Confirm questions');res();}));
   }
+  {const sel=qSel(qc);if(sel.length)FINAL=sel;qc.classList.add('locked');}
   const nQ=FINAL.length,nC=FINAL.reduce((a,id)=>a+qChecks(id),0);
   setStage('schedule');const lk=await ai(`<p>Locked in: <b>${nQ} questions, ${nC} checks.</b></p><p><b>Do you want to start now, or put it on a schedule?</b></p><div class="bubacts"><button class="qb">Start now</button><button class="qb">Schedule it</button><button class="qb">Both</button></div>`);
   suggest($$('.qb',lk)[2]);
@@ -1774,9 +1831,8 @@ async function allDone(){
   $('#recPill').classList.add('done');$('#recT').textContent='Recording saved';setStat('Online');
   await sleep(400);
   const card=await aiCard(`<div class="card2 rcard"><div class="rhd">${pl(r.k)}<div><h4>${PL[r.k].n} · ${PL[r.k].site}</h4><p>${r.steps.length} questions · ${r.issues+r.passed} checks · ${pz(r.proofs,'proof screenshot')} · ${sec}s</p></div></div>
-   <div class="rsum"><p>That’s everything. ${FINAL.length} questions checked in about ${sec} seconds, with a screenshot behind every answer and nothing changed in HubSpot.</p></div>
+   <div class="rsum2"><p>That’s everything. ${FINAL.length} questions checked in about ${sec} seconds, with a screenshot behind every answer and nothing changed in HubSpot.</p></div>
    <div class="tally"><div class="C"><b>${c.C}</b><span>Critical</span></div><div class="G"><b>${c.G}</b><span>Good to have</span></div><div class="K"><b>${c.K}</b><span>Compliant</span></div></div>
-   ${resItems(r)}
    <div class="rlegend"><b style="color:#b91c1c">Critical</b>: breaks a must-have rule in your policy. <b style="color:#b45309">Good to have</b>: a recommended rule isn't met yet. <b style="color:#15803d">Compliant</b>: meets the policy.</div>
    <div class="cact"><button class="qb pr" id="dlAll">Open report</button><button class="qb" data-rp>↻ Replay</button>${DS.sched?'':'<button class="qb" id="setS">Put it on a schedule</button>'}</div></div>`,600);
   $('#dlAll').onclick=()=>openReport('hs');$('[data-rp]',card).onclick=()=>replay('hs');suggest($('#dlAll'));if(AUTO&&STAGES[TARGET]&&STAGES[TARGET][0]==='report'){openReport('hs');stopAuto();}
@@ -1873,7 +1929,7 @@ $('#pSteps').addEventListener('click',e=>{const b=e.target.closest('.ps');if(!b)
 addEventListener('keydown',e=>{
   if(document.activeElement===inp&&inp.value&&e.key!=='Enter')return;
   if(e.key==='Escape'){if(CF.open){closeConnForm();return;}if(CP.open){closeConnPage();return;}if($('#sheet').classList.contains('on'))$('#sheet').classList.remove('on');else if($('#drawer').classList.contains('on'))closeDrawer();else if(LV.open)closeLive();}
-  if((e.key==='ArrowRight'&&!document.activeElement.closest('#cmodal'))||(e.key===' '&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName))){e.preventDefault();if(AUTO)stopAuto();advance();}
+  if((e.key==='ArrowRight'&&!document.activeElement.closest('#cmodal,#mmodal'))||(e.key===' '&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName))){e.preventDefault();if(AUTO)stopAuto();advance();}
 });
 window.__demo={get STG(){return STG;},get AUTO(){return AUTO;},RUNS,LV,openLive,toggleExp,closeLive,openReport,replay,autoFill,send,get PEND(){return PEND;},get filled(){return filled;},get typing(){return typing;}};
 renderDrawer();renderBar();layout();setTimeout(layout,100);flow();
